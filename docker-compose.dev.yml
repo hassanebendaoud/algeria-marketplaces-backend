@@ -20,8 +20,8 @@ services:
     depends_on:
       - mongo_db
     env_file:
-      - db.env
-      - express.env
+      - env/db.env
+      - env/express.env
     restart: always
     volumes:
       - ./src:/usr/src/app/src
