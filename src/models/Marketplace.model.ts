@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const marketplaceSchema = new mongoose.Schema(
   {
     name: {
