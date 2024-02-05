@@ -9,9 +9,12 @@ RUN pnpm install
 
 COPY ./src ./src
 
-COPY ./db.env ./
-COPY ./express.env ./
+COPY ./env/db.env ./env
+COPY ./env/express.env ./env
+COPY ./env/jwt.env ./env
 
 COPY tsconfig.json ./
+
+RUN node 
 
 CMD ["pnpm", "dev"]
