@@ -1,13 +1,24 @@
 import express, { Request, Response } from "express";
+import multer from "multer";
 import cors from "cors";
 import conn from "./db/mongo/conn";
 import { expressConfig } from "./config/express.config";
 
+import authRouter from "./routes/auth";
 import marketplacesRouter from "./routes/marketplaces";
+import utils from "./utils";
+import Passport from "./db/passport";
+import passport from "passport";
 
 const app = express();
+const storage = multer.memoryStorage(); // multer memory storage
+const upload = multer({
+  storage,
+});
 
 conn();
+utils.generateKeyPair();
+utils.checkKeyPairExist();
 
 const port = expressConfig.port;
 if (!port) {
@@ -16,13 +27,24 @@ if (!port) {
 
 console.log(`Express Port: ${port}`);
 
-app.use(cors());
-app.use(express.json());
+Passport(passport);
+app.use(passport.initialize());
+
+// Instead of using body-parser middleware, use the new Express implementation of the same thing
+app.use(express.json()); // parse application/json
+app.use(express.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
+
+// Allows our Angular application to make HTTP requests to Express application
+app.use(cors()); // cors middleware
+
+// Allows our Express application to parse the incoming requests with JSON payloads
+app.use(upload.any()); // multer middleware
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hellow People!");
 });
 
+app.use("/auth", authRouter);
 app.use("/marketplaces", marketplacesRouter);
 
 app.listen(port, () => {
