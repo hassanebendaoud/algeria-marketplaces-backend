@@ -1,7 +1,7 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import createMarketplaceRouter from "./create-marketplace.route";
-import getAllMarketplacesRouter from "./get-all-marketplaces.route";
+import createMarketplaceRouter from './create.route';
+import getAllMarketplacesRouter from './get-all.route';
 
 const router = Router();
 

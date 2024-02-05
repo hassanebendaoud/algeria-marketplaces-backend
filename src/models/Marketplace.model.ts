@@ -1,7 +1,8 @@
-import mongoose from "mongoose";
-import slugify from "slugify";
-import MarketplaceModel from "./Marketplace.model";
-import utils from "../utils";
+import mongoose from 'mongoose';
+import slugify from 'slugify';
+
+import utils from '../utils';
+import MarketplaceModel from './Marketplace.model';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
@@ -33,7 +34,7 @@ const schema = new Schema(
     },
     SocialMedia: {
       type: Schema.Types.ObjectId,
-      ref: "SocialMedia",
+      ref: "MarketplaceSocialMedia",
       select: false,
     },
 
@@ -47,35 +48,35 @@ const schema = new Schema(
     Avatars: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Avatar",
+        ref: "MarketplaceAvatar",
         select: false,
       },
     ],
     Images: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Image",
+        ref: "MarketplaceImage",
         select: false,
       },
     ],
     Videos: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Video",
+        ref: "MarketplaceVideo",
         select: false,
       },
     ],
     ContactsInformation: [
       {
         type: Schema.Types.ObjectId,
-        ref: "ContactInformation",
+        ref: "MarketplaceContactInformation",
         select: false,
       },
     ],
     Addresses: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Address",
+        ref: "MarketplaceAddress",
         select: false,
       },
     ],
@@ -83,35 +84,35 @@ const schema = new Schema(
     Comments: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Comment",
+        ref: "MarketplaceComment",
         select: false,
       },
     ],
     Reviews: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Review",
+        ref: "MarketplaceReview",
         select: false,
       },
     ],
     Likes: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Like",
+        ref: "MarketplaceLike",
         select: false,
       },
     ],
     Votes: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Vote",
+        ref: "MarketplaceVote",
         select: false,
       },
     ],
     Favorites: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Favorite",
+        ref: "MarketplaceFavorite",
         select: false,
       },
     ],
