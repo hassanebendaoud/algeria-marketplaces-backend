@@ -1,6 +1,6 @@
-import { Router, Request, Response } from "express";
-import { MarketplaceInterface } from "../../interfaces/marketplace.interface";
-import { MarketplaceModel } from "../../models";
+import { Router } from 'express';
+
+import { MarketplaceModel } from '../../models';
 
 const router = Router();
 

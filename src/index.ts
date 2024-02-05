@@ -1,5 +1,11 @@
+import compression from 'compression';
 import cors from 'cors';
-import express, { Request, Response } from 'express';
+import express, {
+  Request,
+  Response,
+} from 'express';
+import helmet from 'helmet';
+import morgan from 'morgan';
 import multer from 'multer';
 import passport from 'passport';
 
@@ -29,6 +35,12 @@ console.log(`Express Port: ${port}`);
 
 Passport(passport);
 app.use(passport.initialize());
+
+app.use(helmet()); // helmet middleware
+
+app.use(compression()); // compression middleware
+
+app.use(morgan("dev")); // morgan middleware
 
 // Instead of using body-parser middleware, use the new Express implementation of the same thing
 app.use(express.json()); // parse application/json

@@ -58,6 +58,5 @@ export {
   ProductLikeInterface,
   ProductReviewInterface,
   ProductVoteInterface,
-  s,
   UserInterface,
 };

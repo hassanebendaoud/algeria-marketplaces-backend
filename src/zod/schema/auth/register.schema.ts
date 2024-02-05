@@ -11,8 +11,8 @@ const registerSchema = z.strictObject(
       gender: z.string().optional(),
       dateBirthday: z.string().optional(),
     }),
-    query: z.object({}),
-    params: z.object({}),
+    query: z.strictObject({}),
+    params: z.strictObject({}),
   },
   {
     description: "Register Schema",

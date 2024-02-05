@@ -1,8 +1,13 @@
-import { NextFunction, Request, Response } from "express";
-import { z, type ZodSchema } from "zod";
+import {
+  NextFunction,
+  Request,
+  Response,
+} from 'express';
+import { ZodSchema } from 'zod';
 
 const zodValidateMiddleware =
   (schema: ZodSchema) => (req: Request, res: Response, next: NextFunction) => {
+    console.log({ body: req.body, query: req.query, params: req.params });
     try {
       schema.parse({
         body: req.body,

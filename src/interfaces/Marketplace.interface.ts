@@ -25,15 +25,19 @@ export interface MarketplaceInterface {
 
   User: UserInterface;
 
-  SocialMedia?: MarketplaceSocialMediaInterface[];
   Products?: ProductInterface[];
+
   Avatars?: MarketplaceAvatarInterface[];
   Images?: MarketplaceImageInterface[];
   Videos?: MarketplaceVideoInterface[];
+
   ContactsInformation?: MarketplaceContactInformationInterface[];
   Addresses?: MarketplaceAddressInterface[];
+  SocialMedia?: MarketplaceSocialMediaInterface[];
+
   Comments?: MarketplaceCommentInterface[];
   Reviews?: MarketplaceReviewInterface[];
+
   Likes?: MarketplaceLikeInterface[];
   Votes?: MarketplaceVoteInterface[];
   Favorites?: MarketplaceFavoriteInterface[];
