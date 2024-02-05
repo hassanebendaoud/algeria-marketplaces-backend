@@ -1,14 +1,14 @@
-import express, { Request, Response } from "express";
-import multer from "multer";
-import cors from "cors";
-import conn from "./db/mongo/conn";
-import { expressConfig } from "./config/express.config";
+import cors from 'cors';
+import express, { Request, Response } from 'express';
+import multer from 'multer';
+import passport from 'passport';
 
-import authRouter from "./routes/auth";
-import marketplacesRouter from "./routes/marketplaces";
-import utils from "./utils";
-import Passport from "./db/passport";
-import passport from "passport";
+import { expressConfig } from './config/express.config';
+import conn from './db/mongo/conn';
+import Passport from './db/passport';
+import authRouter from './routes/auth';
+import marketplacesRouter from './routes/marketplaces';
+import utils from './utils';
 
 const app = express();
 const storage = multer.memoryStorage(); // multer memory storage

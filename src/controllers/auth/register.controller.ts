@@ -1,6 +1,7 @@
-import { NextFunction, Request, Response } from "express";
-import utils from "../../utils";
-import { User } from "../../models/User.model";
+import { NextFunction, Request, Response } from 'express';
+
+import { UserModel } from '../../models';
+import utils from '../../utils';
 
 const register = async (req: Request, res: Response, next: NextFunction) => {
   const { name, username, email, password } = req.body;
@@ -12,10 +13,8 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
   const salt = saltHash.salt;
   const hash = saltHash.hash;
 
-  const newUser = new User({
-    name,
-    username,
-    email,
+  const newUser = new UserModel({
+    ...req.body,
     hash,
     salt,
   });

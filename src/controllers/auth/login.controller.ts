@@ -1,12 +1,15 @@
-import { NextFunction, Request, Response } from "express";
-import { User } from "../../models/User.model";
-import utils from "../../utils";
+import { NextFunction, Request, Response } from 'express';
+
+import { UserModel } from '../../models';
+import utils from '../../utils';
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   const { username, password } = req.body;
 
   try {
-    const authUser = await User.findOne({ username });
+    const authUser = await UserModel.findOne({ username }).select(
+      "+hash +salt"
+    );
     if (!authUser) {
       return res
         .status(404)

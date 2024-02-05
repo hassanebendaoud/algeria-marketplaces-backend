@@ -1,9 +1,7 @@
 import passportJWT from "passport-jwt";
 import fs from "fs";
-import path from "path";
-import { User } from "../models/User.model";
-import { UserInterface } from "../interfaces/User.interface";
 import { keysConfig } from "../config/keys.config";
+import { UserModel } from "../models";
 
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
@@ -23,7 +21,7 @@ const Passport = (passport: any) => {
       console.log(jwt_payload);
 
       try {
-        const user = await User.findOne({ _id: jwt_payload.sub });
+        const user = await UserModel.findOne({ _id: jwt_payload.sub });
 
         if (user) {
           console.log(`User ${user.username} found in database`);

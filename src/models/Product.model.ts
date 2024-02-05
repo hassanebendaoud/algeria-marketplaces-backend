@@ -1,27 +1,23 @@
 import mongoose from "mongoose";
 import slugify from "slugify";
-import MarketplaceModel from "./Marketplace.model";
 import utils from "../utils";
+import { ProductModel } from "./";
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
 const schema = new Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
     },
     slug: {
       type: String,
     },
-    username: {
-      type: String,
-      unique: true,
-      required: true,
-    },
-    description: {
-      type: String,
+
+    price: {
+      type: Number,
       required: true,
     },
 
@@ -29,53 +25,23 @@ const schema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
       select: false,
-      required: true,
     },
-    SocialMedia: {
+    Marketplace: {
       type: Schema.Types.ObjectId,
-      ref: "SocialMedia",
+      ref: "Marketplace",
       select: false,
     },
-
-    Products: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Product",
-        select: false,
-      },
-    ],
-    Avatars: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Avatar",
-        select: false,
-      },
-    ],
     Images: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Image",
+        ref: "ProductImage",
         select: false,
       },
     ],
     Videos: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Video",
-        select: false,
-      },
-    ],
-    ContactsInformation: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "ContactInformation",
-        select: false,
-      },
-    ],
-    Addresses: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Address",
+        ref: "ProductVideo",
         select: false,
       },
     ],
@@ -83,35 +49,35 @@ const schema = new Schema(
     Comments: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Comment",
+        ref: "ProductComment",
         select: false,
       },
     ],
     Reviews: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Review",
+        ref: "ProductReview",
         select: false,
       },
     ],
     Likes: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Like",
+        ref: "ProductLike",
         select: false,
       },
     ],
     Votes: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Vote",
+        ref: "ProductVote",
         select: false,
       },
     ],
     Favorites: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Favorite",
+        ref: "ProductFavorite",
         select: false,
       },
     ],
@@ -120,15 +86,14 @@ const schema = new Schema(
 );
 
 schema.index({
-  name: "text",
-  username: "text",
+  title: "text",
   description: "text",
 });
 
 schema.pre("save", async function (next) {
-  const slugifySlug = slugify(this.name, { lower: true });
-  this.slug = await utils.createUniqueSlug(MarketplaceModel, slugifySlug);
+  const slugifySlug = slugify(this.title, { lower: true });
+  this.slug = await utils.createUniqueSlug(ProductModel, slugifySlug);
   next();
 });
 
-export default model("Marketplace", schema);
+export default model("Product", schema);

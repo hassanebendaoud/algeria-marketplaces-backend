@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { MarketplaceInterface } from "../../interfaces/marketplace.interface";
-import { Marketplace } from "../../models/Marketplace.model";
+import { MarketplaceModel } from "../../models";
 
 const router = Router();
 
@@ -14,7 +14,7 @@ router.post("/", async (req: Request, res: Response) => {
       username: marketplace.username,
     };
 
-    const marketplaceCreated = await Marketplace.create(newMarketplace);
+    const marketplaceCreated = await MarketplaceModel.create(newMarketplace);
 
     return res.status(201).send(marketplaceCreated);
   } catch (error: any) {
@@ -26,7 +26,7 @@ router.post("/", async (req: Request, res: Response) => {
 // Route for Get All Marketplaces from database
 router.get("/", async (request, response) => {
   try {
-    const marketplaces = await Marketplace.find({});
+    const marketplaces = await MarketplaceModel.find({});
 
     return response.status(200).json({
       count: marketplaces.length,
