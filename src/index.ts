@@ -12,7 +12,7 @@ import Passport from '@db/passport';
 import authRouter from '@routes/auth/index';
 import marketplacesRouter from '@routes/marketplaces';
 import productsRouter from '@routes/products';
-// import usersRouter from '@routes/users';
+import usersRouter from '@routes/users';
 import utils from '@utils/index';
 
 const app = express();
@@ -56,7 +56,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/auth', authRouter);
-// app.use('/users', usersRouter);
+app.use('/users', usersRouter);
 app.use('/marketplaces', marketplacesRouter);
 app.use('/products', productsRouter);
 

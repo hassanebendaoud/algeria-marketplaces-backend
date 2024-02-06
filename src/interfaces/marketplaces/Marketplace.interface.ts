@@ -1,6 +1,5 @@
 import { ObjectId } from 'mongoose';
 
-import { UserInterface } from '@interfaces/auth/User.interface';
 import { MarketplaceAddressInterface } from '@interfaces/marketplaces/MarketplaceAddress.interface';
 import { MarketplaceAvatarInterface } from '@interfaces/marketplaces/MarketplaceAvatar.interface';
 import { MarketplaceCommentInterface } from '@interfaces/marketplaces/MarketplaceComment.interface';
@@ -19,6 +18,7 @@ import {
 import { MarketplaceVideoInterface } from '@interfaces/marketplaces/MarketplaceVideo.interface';
 import { MarketplaceVoteInterface } from '@interfaces/marketplaces/MarketplaceVote.interface';
 import { ProductInterface } from '@interfaces/products/Product.interface';
+import { UserInterface } from '@interfaces/users/User.interface';
 
 export interface MarketplaceInterface {
     id: string;

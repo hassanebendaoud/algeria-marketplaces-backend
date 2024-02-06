@@ -1,5 +1,3 @@
-// Users interfaces
-import { UserInterface } from '@interfaces/auth/User.interface';
 // Marketplaces interfaces
 import { MarketplaceInterface } from '@interfaces/marketplaces/Marketplace.interface';
 import { MarketplaceAddressInterface } from '@interfaces/marketplaces/MarketplaceAddress.interface';
@@ -34,6 +32,8 @@ import { CommentInterface } from '@interfaces/shared/Comment.interface';
 import { ContactInformationInterface } from '@interfaces/shared/ContactInformation.interface';
 import { FileInterface } from '@interfaces/shared/File.interface';
 import { InteractionInterface } from '@interfaces/shared/Interaction.interface';
+// Users interfaces
+import { UserInterface } from '@interfaces/users/User.interface';
 
 export {
     AddressInterface,

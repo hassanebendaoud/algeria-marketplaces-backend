@@ -1,15 +1,15 @@
 import { ObjectId } from 'mongoose';
 
-import { UserInterface } from '@interfaces/auth/User.interface';
+import { UserInterface } from '@interfaces/users/User.interface';
 
 export interface ReviewInterface {
-  id: string;
+    id: string;
 
-  start: number;
-  content: string;
+    start: number;
+    content: string;
 
-  User: UserInterface | ObjectId | string;
+    User: UserInterface | ObjectId | string;
 
-  createdAt: Date;
-  updatedAt: Date;
+    createdAt: Date;
+    updatedAt: Date;
 }

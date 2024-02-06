@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongoose';
 
-import { UserInterface } from '@interfaces/auth/User.interface';
+import { UserInterface } from '@interfaces/users/User.interface';
 
 export interface CommentInterface {
   id: string;

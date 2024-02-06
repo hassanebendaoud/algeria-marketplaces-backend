@@ -1,6 +1,5 @@
 import { ObjectId } from 'mongoose';
 
-import { UserInterface } from '@interfaces/auth/User.interface';
 import { MarketplaceInterface } from '@interfaces/marketplaces/Marketplace.interface';
 import { ProductCommentInterface } from '@interfaces/products/ProductComment.interface';
 import { ProductFavoriteInterface } from '@interfaces/products/ProductFavorite.interface';
@@ -9,6 +8,7 @@ import { ProductLikeInterface } from '@interfaces/products/ProductLike.interface
 import { ProductReviewInterface } from '@interfaces/products/ProductReview.interface';
 import { ProductVideoInterface } from '@interfaces/products/ProductVideo.interface';
 import { ProductVoteInterface } from '@interfaces/products/ProductVote.interface';
+import { UserInterface } from '@interfaces/users/User.interface';
 
 export interface ProductInterface {
     title: string;
