@@ -1,6 +1,6 @@
-import utils from "./utils";
+import utils from './utils';
 
 (() => {
-  utils.generateKeyPair();
-  utils.checkKeyPairExist();
+    utils.generateKeyPair();
+    utils.checkKeyPairExist();
 })();

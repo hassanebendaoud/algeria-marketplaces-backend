@@ -4,6 +4,6 @@ import { createMarketplaceController } from '@controllers/marketplaces';
 
 const router = Router();
 
-router.post("/", createMarketplaceController);
+router.post('/', createMarketplaceController);
 
 export default router;

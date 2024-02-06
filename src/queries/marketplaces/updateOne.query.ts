@@ -1,16 +1,17 @@
 import { MarketplaceModel } from '@/models';
+import { updateOneMarketplacesQueryType } from '@/types/marketplaces';
 
 const updateOneQuery = async ({
-  filter,
-  data,
-  options,
-}: {
-  filter: any;
-  data: any;
-  options?: any;
-}) => {
-  const recordUpdated = await MarketplaceModel.updateOne(filter, data, options);
-  return recordUpdated;
+    filter,
+    update,
+    options,
+}: updateOneMarketplacesQueryType) => {
+    const recordUpdated = await MarketplaceModel.updateOne(
+        filter,
+        update,
+        options
+    );
+    return recordUpdated;
 };
 
 export default updateOneQuery;

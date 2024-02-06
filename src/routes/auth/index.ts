@@ -7,8 +7,8 @@ import registerRoute from '@routes/auth/register.route';
 
 const router = Router();
 
-router.use("/login", loginRoute);
-router.use("/register", registerRoute);
-router.use("/protect", authMiddleware, protectRoute);
+router.use('/login', loginRoute);
+router.use('/register', registerRoute);
+router.use('/protect', authMiddleware, protectRoute);
 
 export default router;

@@ -5,11 +5,11 @@ import isSlugExists from './isSlugExists.middleware';
 import isUsernameExists from './isUsernameExists.middleware';
 
 const marketplacesMiddleware = {
-  isExists,
-  isIdValid,
-  isOwner,
-  isUsernameExists,
-  isSlugExists,
+    isExists,
+    isIdValid,
+    isOwner,
+    isUsernameExists,
+    isSlugExists,
 };
 
 export default marketplacesMiddleware;

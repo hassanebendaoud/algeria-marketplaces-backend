@@ -20,53 +20,53 @@ import updateMarketplaceRouter from './update.route';
 const router = Router();
 
 router.use(
-  "/get-all",
-  zodValidateMiddleware(getAllMarketplacesSchema),
-  getAllMarketplacesRouter
+    '/get-all',
+    zodValidateMiddleware(getAllMarketplacesSchema),
+    getAllMarketplacesRouter
 );
 router.use(
-  "/get-one-by-id",
-  zodValidateMiddleware(getOneByIdMarketplaceSchema),
-  marketplacesMiddleware.isIdValid,
-  getOneByIdMarketplaceRouter
+    '/get-one-by-id',
+    zodValidateMiddleware(getOneByIdMarketplaceSchema),
+    marketplacesMiddleware.isIdValid,
+    getOneByIdMarketplaceRouter
 );
 router.use(
-  "/get-one-by-username",
-  zodValidateMiddleware(getOneByUsernameMarketplaceSchema),
-  getOneByUsernameMarketplaceRouter
+    '/get-one-by-username',
+    zodValidateMiddleware(getOneByUsernameMarketplaceSchema),
+    getOneByUsernameMarketplaceRouter
 );
 router.use(
-  "/get-one-by-slug",
-  zodValidateMiddleware(getOneBySlugMarketplaceSchema),
-  getOneBySlugMarketplaceRouter
+    '/get-one-by-slug',
+    zodValidateMiddleware(getOneBySlugMarketplaceSchema),
+    getOneBySlugMarketplaceRouter
 );
 
 router.use(
-  "/create",
-  authMiddleware,
-  zodValidateMiddleware(createMarketplaceSchema),
-  marketplacesMiddleware.isUsernameExists,
-  // marketplacesMiddleware.isSlugExists,
-  createMarketplaceRouter
+    '/create',
+    authMiddleware,
+    zodValidateMiddleware(createMarketplaceSchema),
+    marketplacesMiddleware.isUsernameExists,
+    // marketplacesMiddleware.isSlugExists,
+    createMarketplaceRouter
 );
 router.use(
-  "/update",
-  authMiddleware,
-  zodValidateMiddleware(updateMarketplaceSchema),
-  marketplacesMiddleware.isExists,
-  marketplacesMiddleware.isUsernameExists,
-  // marketplacesMiddleware.isSlugExists,
-  marketplacesMiddleware.isOwner,
-  updateMarketplaceRouter
+    '/update',
+    authMiddleware,
+    zodValidateMiddleware(updateMarketplaceSchema),
+    marketplacesMiddleware.isExists,
+    marketplacesMiddleware.isUsernameExists,
+    // marketplacesMiddleware.isSlugExists,
+    marketplacesMiddleware.isOwner,
+    updateMarketplaceRouter
 );
 router.use(
-  "/delete",
-  authMiddleware,
-  zodValidateMiddleware(deleteMarketplaceSchema),
-  marketplacesMiddleware.isIdValid,
-  marketplacesMiddleware.isExists,
-  marketplacesMiddleware.isOwner,
-  deleteMarketplaceRouter
+    '/delete',
+    authMiddleware,
+    zodValidateMiddleware(deleteMarketplaceSchema),
+    marketplacesMiddleware.isIdValid,
+    marketplacesMiddleware.isExists,
+    marketplacesMiddleware.isOwner,
+    deleteMarketplaceRouter
 );
 
 export default router;

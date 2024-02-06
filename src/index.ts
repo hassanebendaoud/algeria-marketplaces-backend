@@ -16,7 +16,7 @@ import utils from '@utils/index';
 const app = express();
 const storage = multer.memoryStorage(); // multer memory storage
 const upload = multer({
-  storage,
+    storage,
 });
 
 conn();
@@ -25,7 +25,7 @@ utils.checkKeyPairExist();
 
 const port = expressConfig.port;
 if (!port) {
-  throw new Error("Express Port is required");
+    throw new Error('Express Port is required');
 }
 
 console.log(`Express Port: ${port}`);
@@ -37,7 +37,7 @@ app.use(helmet()); // helmet middleware
 
 app.use(compression()); // compression middleware
 
-app.use(morgan("dev")); // morgan middleware
+app.use(morgan('dev')); // morgan middleware
 
 // Instead of using body-parser middleware, use the new Express implementation of the same thing
 app.use(express.json()); // parse application/json
@@ -49,13 +49,13 @@ app.use(cors()); // cors middleware
 // Allows our Express application to parse the incoming requests with JSON payloads
 app.use(upload.any()); // multer middleware
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hellow People!");
+app.get('/', (req: Request, res: Response) => {
+    res.send('Hellow People!');
 });
 
-app.use("/auth", authRouter);
-app.use("/marketplaces", marketplacesRouter);
+app.use('/auth', authRouter);
+app.use('/marketplaces', marketplacesRouter);
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running at http://localhost:${port}`);
 });

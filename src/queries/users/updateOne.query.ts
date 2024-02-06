@@ -1,16 +1,13 @@
 import { UserModel } from '@/models';
+import { updateOneUsersQueryType } from '@/types/users';
 
 const updateOneQuery = async ({
-  filter,
-  data,
-  options,
-}: {
-  filter: any;
-  data: any;
-  options?: any;
-}) => {
-  const recordUpdated = await UserModel.updateOne(filter, data, options);
-  return recordUpdated;
+    filter,
+    update,
+    options,
+}: updateOneUsersQueryType) => {
+    const recordUpdated = await UserModel.updateOne(filter, update, options);
+    return recordUpdated;
 };
 
 export default updateOneQuery;

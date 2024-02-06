@@ -1,14 +1,17 @@
 import { MarketplaceModel } from '@/models';
+import { findOneAndUpdateMarketplacesQueryType } from '@/types/marketplaces';
 
 const findOneAndUpdateQuery = async ({
-  filter,
-  data,
-}: {
-  filter: any;
-  data: any;
-}) => {
-  const recordUpdated = await MarketplaceModel.findOneAndUpdate(filter, data);
-  return recordUpdated;
+    filter,
+    update,
+    options,
+}: findOneAndUpdateMarketplacesQueryType) => {
+    const recordUpdated = await MarketplaceModel.findOneAndUpdate(
+        filter,
+        update,
+        options
+    );
+    return recordUpdated;
 };
 
 export default findOneAndUpdateQuery;

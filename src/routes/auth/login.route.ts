@@ -6,6 +6,6 @@ import zodValidateMiddleware from '@middleware/auth/zodValidate.middleware';
 
 const router = express.Router();
 
-router.post("/", zodValidateMiddleware(loginSchema), login);
+router.post('/', zodValidateMiddleware(loginSchema), login);
 
 export default router;

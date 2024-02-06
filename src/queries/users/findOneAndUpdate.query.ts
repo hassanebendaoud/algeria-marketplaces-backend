@@ -1,16 +1,17 @@
 import { UserModel } from '@/models';
+import { findOneAndUpdateUsersQueryType } from '@/types/users';
 
 const findOneAndUpdateQuery = async ({
-  filter,
-  data,
-  options,
-}: {
-  filter: any;
-  data: any;
-  options?: any;
-}) => {
-  const recordUpdated = await UserModel.findOneAndUpdate(filter, data, options);
-  return recordUpdated;
+    filter,
+    update,
+    options,
+}: findOneAndUpdateUsersQueryType) => {
+    const recordUpdated = await UserModel.findOneAndUpdate(
+        filter,
+        update,
+        options
+    );
+    return recordUpdated;
 };
 
 export default findOneAndUpdateQuery;

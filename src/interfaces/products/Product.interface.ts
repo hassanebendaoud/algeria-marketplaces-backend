@@ -11,24 +11,24 @@ import { ProductVideoInterface } from '@interfaces/products/ProductVideo.interfa
 import { ProductVoteInterface } from '@interfaces/products/ProductVote.interface';
 
 export interface ProductInterface {
-  title: string;
-  slug?: string;
-  price: number;
+    title: string;
+    slug?: string;
+    price: number;
 
-  User: UserInterface | ObjectId | string;
+    User: UserInterface | ObjectId | string;
 
-  Marketplace: MarketplaceInterface | ObjectId | string;
+    Marketplace: MarketplaceInterface | ObjectId | string;
 
-  Images?: (ProductImageInterface | ObjectId | string)[];
-  Videos?: (ProductVideoInterface | ObjectId | string)[];
+    Images?: (ProductImageInterface | ObjectId | string)[];
+    Videos?: (ProductVideoInterface | ObjectId | string)[];
 
-  Comments?: (ProductCommentInterface | ObjectId | string)[];
-  Reviews?: (ProductReviewInterface | ObjectId | string)[];
+    Comments?: (ProductCommentInterface | ObjectId | string)[];
+    Reviews?: (ProductReviewInterface | ObjectId | string)[];
 
-  Likes?: (ProductLikeInterface | ObjectId | string)[];
-  Votes?: (ProductVoteInterface | ObjectId | string)[];
-  Favorites?: (ProductFavoriteInterface | ObjectId | string)[];
+    Likes?: (ProductLikeInterface | ObjectId | string)[];
+    Votes?: (ProductVoteInterface | ObjectId | string)[];
+    Favorites?: (ProductFavoriteInterface | ObjectId | string)[];
 
-  createdAt: Date;
-  updatedAt: Date;
+    createdAt: Date;
+    updatedAt: Date;
 }

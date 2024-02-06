@@ -8,15 +8,15 @@ import findOneAndUpdateQuery from './findOneAndUpdate.query';
 import updateOneQuery from './updateOne.query';
 
 const usersQueries = {
-  createQuery,
-  updateOneQuery,
-  deleteOneQuery,
+    createQuery,
+    updateOneQuery,
+    deleteOneQuery,
 
-  findAllQuery,
-  findByIdQuery,
-  findByIdAndUpdateQuery,
-  findOneQuery,
-  findOneAndUpdateQuery,
+    findAllQuery,
+    findByIdQuery,
+    findByIdAndUpdateQuery,
+    findOneQuery,
+    findOneAndUpdateQuery,
 };
 
 export default usersQueries;

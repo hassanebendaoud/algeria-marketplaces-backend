@@ -6,24 +6,24 @@ const Schema = mongoose.Schema;
 const model = mongoose.model;
 
 const schema = new Schema(
-  {
-    ...fileConstant,
+    {
+        ...fileConstant,
 
-    User: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
+        User: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
+
+        Marketplaces: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Marketplace',
+                required: true,
+            },
+        ],
     },
-
-    Marketplaces: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Marketplace",
-        required: true,
-      },
-    ],
-  },
-  { timestamps: true }
+    { timestamps: true }
 );
 
-export default model("MarketplaceCover", schema);
+export default model('MarketplaceCover', schema);

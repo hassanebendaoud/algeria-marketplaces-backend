@@ -1,37 +1,39 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 
+import utils from '@/utils';
 import { marketplacesQueries } from '@queries/index';
 
 const getOneByUsernameMarketplaceController = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
+    req: Request,
+    res: Response
 ) => {
-  try {
-    const marketplaceUsername = req.query.marketplaceUsername! as string;
+    try {
+        const marketplaceUsername = req.query.marketplaceUsername! as string;
 
-    const marketplace = await marketplacesQueries.findOneQuery({
-      filter: { username: marketplaceUsername },
-    });
+        const marketplace = await marketplacesQueries.findOneQuery({
+            filter: {
+                username: marketplaceUsername,
+            },
+            select: '',
+        });
 
-    if (!marketplace) {
-      return res.status(404).json({
-        success: false,
-        status: "error",
-        message: "Marketplace not found",
-      });
+        if (!marketplace) {
+            return res.status(404).json({
+                success: false,
+                status: 'error',
+                message: 'Marketplace not found',
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            status: 'success',
+            message: 'Marketplace found',
+            data: marketplace,
+        });
+    } catch (error: unknown) {
+        utils.handleCatchErrorResponse(error, res);
     }
-
-    return res.status(200).json({
-      success: true,
-      status: "success",
-      message: "Marketplace found",
-      data: marketplace,
-    });
-  } catch (error: any) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
 };
 
 export default getOneByUsernameMarketplaceController;

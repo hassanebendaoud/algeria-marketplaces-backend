@@ -6,21 +6,21 @@ const Schema = mongoose.Schema;
 const model = mongoose.model;
 
 const schema = new Schema(
-  {
-    ...fileConstant,
+    {
+        ...fileConstant,
 
-    User: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+        User: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+        Listings: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Listing',
+            },
+        ],
     },
-    Listings: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Listing",
-      },
-    ],
-  },
-  { timestamps: true }
+    { timestamps: true }
 );
 
-export default model("MarketplaceVideo", schema);
+export default model('MarketplaceVideo', schema);

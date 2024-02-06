@@ -1,1 +1,1 @@
-export { default as fileConstant } from "./file.constant";
+export { default as fileConstant } from './file.constant';

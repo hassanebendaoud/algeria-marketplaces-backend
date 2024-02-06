@@ -21,35 +21,35 @@ import { MarketplaceVoteInterface } from '@interfaces/marketplaces/MarketplaceVo
 import { ProductInterface } from '@interfaces/products/Product.interface';
 
 export interface MarketplaceInterface {
-  id: string;
-  name: string;
-  slug?: string;
-  username: string;
-  description: string;
+    id: string;
+    name: string;
+    slug?: string;
+    username: string;
+    description: string;
 
-  User: UserInterface | ObjectId | string;
+    User: UserInterface | ObjectId | string;
 
-  Products?: (ProductInterface | ObjectId | string)[];
+    Products?: (ProductInterface | ObjectId | string)[];
 
-  Avatars?: (MarketplaceAvatarInterface | ObjectId | string)[];
-  Images?: (MarketplaceImageInterface | ObjectId | string)[];
-  Videos?: (MarketplaceVideoInterface | ObjectId | string)[];
+    Avatars?: (MarketplaceAvatarInterface | ObjectId | string)[];
+    Images?: (MarketplaceImageInterface | ObjectId | string)[];
+    Videos?: (MarketplaceVideoInterface | ObjectId | string)[];
 
-  ContactsInformation?: (
-    | MarketplaceContactInformationInterface
-    | ObjectId
-    | string
-  )[];
-  Addresses?: (MarketplaceAddressInterface | ObjectId | string)[];
-  SocialMedia?: (MarketplaceSocialMediaInterface | ObjectId | string)[];
+    ContactsInformation?: (
+        | MarketplaceContactInformationInterface
+        | ObjectId
+        | string
+    )[];
+    Addresses?: (MarketplaceAddressInterface | ObjectId | string)[];
+    SocialMedia?: (MarketplaceSocialMediaInterface | ObjectId | string)[];
 
-  Comments?: (MarketplaceCommentInterface | ObjectId | string)[];
-  Reviews?: (MarketplaceReviewInterface | ObjectId | string)[];
+    Comments?: (MarketplaceCommentInterface | ObjectId | string)[];
+    Reviews?: (MarketplaceReviewInterface | ObjectId | string)[];
 
-  Likes?: (MarketplaceLikeInterface | ObjectId | string)[];
-  Votes?: (MarketplaceVoteInterface | ObjectId | string)[];
-  Favorites?: (MarketplaceFavoriteInterface | ObjectId | string)[];
+    Likes?: (MarketplaceLikeInterface | ObjectId | string)[];
+    Votes?: (MarketplaceVoteInterface | ObjectId | string)[];
+    Favorites?: (MarketplaceFavoriteInterface | ObjectId | string)[];
 
-  createdAt: Date;
-  updatedAt: Date;
+    createdAt: Date;
+    updatedAt: Date;
 }

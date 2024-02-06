@@ -1,18 +1,22 @@
-import { ObjectId } from 'bson';
-
 import { UserModel } from '@/models';
+import { findByIdUsersQueryType } from '@/types/users';
 
 const findByIdQuery = async ({
-  _id,
-  populate = [],
-  salt = [],
-}: {
-  _id: ObjectId;
-  populate?: any[];
-  salt?: string[];
-}) => {
-  const data = await UserModel.findById(_id).select(salt).populate(populate);
-  return data;
+    filter: { _id },
+    populate = {
+        path: '',
+    },
+    select,
+}: findByIdUsersQueryType) => {
+    const data = await UserModel.findById(_id)
+        .select(select)
+        .populate(
+            populate?.path,
+            populate?.select,
+            populate?.model,
+            populate?.match
+        );
+    return data;
 };
 
 export default findByIdQuery;

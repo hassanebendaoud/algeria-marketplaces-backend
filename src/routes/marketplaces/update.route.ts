@@ -4,6 +4,6 @@ import { updateOneByIdMarketplaceController } from '@controllers/marketplaces';
 
 const router = Router();
 
-router.patch("/", updateOneByIdMarketplaceController);
+router.patch('/', updateOneByIdMarketplaceController);
 
 export default router;

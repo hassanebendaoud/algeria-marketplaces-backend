@@ -6,21 +6,21 @@ const Schema = mongoose.Schema;
 const model = mongoose.model;
 
 const schema = new Schema(
-  {
-    ...fileConstant,
+    {
+        ...fileConstant,
 
-    User: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
+        User: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
 
-    Marketplaces: {
-      type: Schema.Types.ObjectId,
-      ref: "Marketplace",
-      required: true,
+        Marketplaces: {
+            type: Schema.Types.ObjectId,
+            ref: 'Marketplace',
+            required: true,
+        },
     },
-  },
-  { timestamps: true }
+    { timestamps: true }
 );
 
-export default model("MarketplaceAvatar", schema);
+export default model('MarketplaceAvatar', schema);

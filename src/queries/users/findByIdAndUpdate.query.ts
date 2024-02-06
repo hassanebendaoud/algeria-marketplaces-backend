@@ -1,18 +1,17 @@
-import { ObjectId } from 'bson';
-
 import { UserModel } from '@/models';
+import { findByIdAndUpdateUsersQueryType } from '@/types/users';
 
 const findByIdAndUpdateQuery = async ({
-  _id,
-  data,
-  options,
-}: {
-  _id: ObjectId;
-  data: any;
-  options?: any;
-}) => {
-  const recordUpdated = await UserModel.findByIdAndUpdate(_id, data, options);
-  return recordUpdated;
+    _id,
+    update,
+    options,
+}: findByIdAndUpdateUsersQueryType) => {
+    const recordUpdated = await UserModel.findByIdAndUpdate(
+        _id,
+        update,
+        options
+    );
+    return recordUpdated;
 };
 
 export default findByIdAndUpdateQuery;

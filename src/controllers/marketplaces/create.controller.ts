@@ -1,50 +1,45 @@
-import { ObjectId } from 'bson';
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 
+import utils from '@/utils';
 import { MarketplaceInterface } from '@interfaces/index';
 import { marketplacesQueries, usersQueries } from '@queries/index';
 
-const createMarketplaceController = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const marketplace: MarketplaceInterface = req.body;
-    const User = new ObjectId(marketplace.User! as string);
+const createMarketplaceController = async (req: Request, res: Response) => {
+    try {
+        const marketplace: MarketplaceInterface = req.body;
+        const User = marketplace.User! as string;
 
-    const newMarketplace: MarketplaceInterface = {
-      ...marketplace,
-    };
+        const newMarketplace: MarketplaceInterface = {
+            ...marketplace,
+        };
 
-    const marketplaceCreated = await marketplacesQueries.createQuery({
-      data: newMarketplace,
-    });
+        const marketplaceCreated = await marketplacesQueries.createQuery({
+            data: newMarketplace,
+        });
 
-    await usersQueries.findByIdAndUpdateQuery({
-      _id: User,
-      data: {
-        $push: {
-          Marketplaces: marketplaceCreated._id,
-        },
-      },
-      options: {
-        upsert: false,
-        new: true,
-        runValidators: true,
-      },
-    });
+        await usersQueries.findByIdAndUpdateQuery({
+            _id: User,
+            update: {
+                $push: {
+                    Marketplaces: marketplaceCreated._id,
+                },
+            },
+            options: {
+                upsert: false,
+                new: true,
+                runValidators: true,
+            },
+        });
 
-    return res.status(201).json({
-      success: true,
-      status: "success",
-      message: "Marketplace Created",
-      data: marketplaceCreated,
-    });
-  } catch (error: any) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
+        return res.status(201).json({
+            success: true,
+            status: 'success',
+            message: 'Marketplace Created',
+            data: marketplaceCreated,
+        });
+    } catch (error: unknown) {
+        utils.handleCatchErrorResponse(error, res);
+    }
 };
 
 export default createMarketplaceController;
