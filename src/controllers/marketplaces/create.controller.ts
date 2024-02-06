@@ -1,16 +1,24 @@
 import { Request, Response } from 'express';
 
+import { ExpressUser } from '@/types/ExpressUser';
 import utils from '@/utils';
 import { MarketplaceInterface } from '@interfaces/index';
 import { marketplacesQueries, usersQueries } from '@queries/index';
 
 const createMarketplaceController = async (req: Request, res: Response) => {
     try {
+        // Get the marketplace from the request body
         const marketplace: MarketplaceInterface = req.body;
-        const User = marketplace.User! as string;
+
+        // This is the user that is logged in
+        const user = req.user! as ExpressUser;
+
+        // This is the id of the user that is logged in
+        const userId = user._id.toString() as string;
 
         const newMarketplace: MarketplaceInterface = {
             ...marketplace,
+            User: userId,
         };
 
         const marketplaceCreated = await marketplacesQueries.createQuery({
@@ -18,7 +26,7 @@ const createMarketplaceController = async (req: Request, res: Response) => {
         });
 
         await usersQueries.findByIdAndUpdateQuery({
-            _id: User,
+            _id: userId,
             update: {
                 $push: {
                     Marketplaces: marketplaceCreated._id,
