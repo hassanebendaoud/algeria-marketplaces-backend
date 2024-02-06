@@ -18,7 +18,10 @@ const schema = new Schema<ProductInterface>(
         slug: {
             type: String,
         },
-
+        description: {
+            type: String,
+            required: true,
+        },
         price: {
             type: Number,
             required: true,
@@ -27,25 +30,21 @@ const schema = new Schema<ProductInterface>(
         User: {
             type: Schema.Types.ObjectId,
             ref: 'User',
-            select: false,
         },
         Marketplace: {
             type: Schema.Types.ObjectId,
             ref: 'Marketplace',
-            select: false,
         },
         Images: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'ProductImage',
-                select: false,
             },
         ],
         Videos: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'ProductVideo',
-                select: false,
             },
         ],
 
@@ -53,35 +52,30 @@ const schema = new Schema<ProductInterface>(
             {
                 type: Schema.Types.ObjectId,
                 ref: 'ProductComment',
-                select: false,
             },
         ],
         Reviews: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'ProductReview',
-                select: false,
             },
         ],
         Likes: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'ProductLike',
-                select: false,
             },
         ],
         Votes: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'ProductVote',
-                select: false,
             },
         ],
         Favorites: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'ProductFavorite',
-                select: false,
             },
         ],
     },

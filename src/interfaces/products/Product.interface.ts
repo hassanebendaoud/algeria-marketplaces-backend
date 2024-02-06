@@ -13,6 +13,7 @@ import { ProductVoteInterface } from '@interfaces/products/ProductVote.interface
 export interface ProductInterface {
     title: string;
     slug?: string;
+    description: string;
     price: number;
 
     User: UserInterface | ObjectId | string;
