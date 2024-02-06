@@ -1,8 +1,8 @@
 import express from 'express';
 
-import register from '../../controllers/auth/register.controller';
-import zodValidateMiddleware from '../../middleware/zodValidate.middleware';
-import registerSchema from '../../zod/schema/auth/register.schema';
+import registerSchema from '@/zod/schemas/auth/register.schema';
+import register from '@controllers/auth/register.controller';
+import zodValidateMiddleware from '@middleware/auth/zodValidate.middleware';
 
 const router = express.Router();
 

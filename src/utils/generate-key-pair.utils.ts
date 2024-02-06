@@ -1,6 +1,7 @@
-import crypto from "crypto";
-import fs from "fs";
-import { keysConfig } from "../config/keys.config";
+import crypto from 'crypto';
+import fs from 'fs';
+
+import { keysConfig } from '@config/index';
 
 const generateKeyPair = () => {
   // Generates an object where the keys are stored in properties `privateKey` and `publicKey`

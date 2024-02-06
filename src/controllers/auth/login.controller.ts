@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { UserModel } from '../../models';
-import utils from '../../utils';
+import { UserModel } from '@/models';
+import utils from '@/utils';
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   const { username, password } = req.body;

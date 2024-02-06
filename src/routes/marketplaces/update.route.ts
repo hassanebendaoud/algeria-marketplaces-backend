@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import { updateMarketplaceController } from '../../controllers/marketplaces';
+import { updateOneByIdMarketplaceController } from '@controllers/marketplaces';
 
 const router = Router();
 
-router.patch("/", updateMarketplaceController);
+router.patch("/", updateOneByIdMarketplaceController);
 
 export default router;

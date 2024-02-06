@@ -1,5 +1,6 @@
-import fs from "fs";
-import { keysConfig } from "../config/keys.config";
+import fs from 'fs';
+
+import { keysConfig } from '@config/index';
 
 const checkKeyPairExist = () => {
   // Path to the public key file

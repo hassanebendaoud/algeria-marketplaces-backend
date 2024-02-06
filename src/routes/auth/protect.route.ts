@@ -1,5 +1,6 @@
-import express from "express";
-import protect from "../../controllers/auth/protect.controller";
+import express from 'express';
+
+import protect from '@controllers/auth/protect.controller';
 
 const router = express.Router();
 

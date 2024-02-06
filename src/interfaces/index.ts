@@ -1,37 +1,39 @@
-import { AddressInterface } from './Address.interface';
-import { CommentInterface } from './Comment.interface';
-import { ContactInformationInterface } from './ContactInformation.interface';
-import { FileInterface } from './File.interface';
-import { InteractionInterface } from './Interaction.interface';
-// Marketplaces interfaces
-import { MarketplaceInterface } from './Marketplace.interface';
-import { MarketplaceAddressInterface } from './MarketplaceAddress.interface';
-import { MarketplaceAvatarInterface } from './MarketplaceAvatar.interface';
-import { MarketplaceCommentInterface } from './MarketplaceComment.interface';
-import {
-  MarketplaceContactInformationInterface,
-} from './MarketplaceContactInformation.interface';
-import { MarketplaceFavoriteInterface } from './MarketplaceFavorite.interface';
-import { MarketplaceImageInterface } from './MarketplaceImage.interface';
-import {
-  MarketplaceInteractionInterface,
-} from './MarketplaceInteraction.interface';
-import { MarketplaceReviewInterface } from './MarketplaceReview.interface';
-import {
-  MarketplaceSocialMediaInterface,
-} from './MarketplaceSocialMedia.interface';
-import { MarketplaceVideoInterface } from './MarketplaceVideo.interface';
-import { MarketplaceVoteInterface } from './MarketplaceVote.interface';
-// Products interfaces
-import { ProductInterface } from './Product.interface';
-import { ProductFavoriteInterface } from './ProductFavorite.interface';
-import { ProductImageInterface } from './ProductImage.interface';
-import { ProductInteractionInterface } from './ProductInteraction.interface';
-import { ProductLikeInterface } from './ProductLike.interface';
-import { ProductReviewInterface } from './ProductReview.interface';
-import { ProductVoteInterface } from './ProductVote.interface';
 // Users interfaces
-import { UserInterface } from './User.interface';
+import { UserInterface } from '@interfaces/auth/User.interface';
+// Marketplaces interfaces
+import { MarketplaceInterface } from '@interfaces/marketplaces/Marketplace.interface';
+import { MarketplaceAddressInterface } from '@interfaces/marketplaces/MarketplaceAddress.interface';
+import { MarketplaceAvatarInterface } from '@interfaces/marketplaces/MarketplaceAvatar.interface';
+import { MarketplaceCommentInterface } from '@interfaces/marketplaces/MarketplaceComment.interface';
+import {
+    MarketplaceContactInformationInterface
+} from '@interfaces/marketplaces/MarketplaceContactInformation.interface';
+import {
+    MarketplaceFavoriteInterface
+} from '@interfaces/marketplaces/MarketplaceFavorite.interface';
+import { MarketplaceImageInterface } from '@interfaces/marketplaces/MarketplaceImage.interface';
+import {
+    MarketplaceInteractionInterface
+} from '@interfaces/marketplaces/MarketplaceInteraction.interface';
+import { MarketplaceReviewInterface } from '@interfaces/marketplaces/MarketplaceReview.interface';
+import {
+    MarketplaceSocialMediaInterface
+} from '@interfaces/marketplaces/MarketplaceSocialMedia.interface';
+import { MarketplaceVideoInterface } from '@interfaces/marketplaces/MarketplaceVideo.interface';
+import { MarketplaceVoteInterface } from '@interfaces/marketplaces/MarketplaceVote.interface';
+// Products interfaces
+import { ProductInterface } from '@interfaces/products/Product.interface';
+import { ProductFavoriteInterface } from '@interfaces/products/ProductFavorite.interface';
+import { ProductImageInterface } from '@interfaces/products/ProductImage.interface';
+import { ProductInteractionInterface } from '@interfaces/products/ProductInteraction.interface';
+import { ProductLikeInterface } from '@interfaces/products/ProductLike.interface';
+import { ProductReviewInterface } from '@interfaces/products/ProductReview.interface';
+import { ProductVoteInterface } from '@interfaces/products/ProductVote.interface';
+import { AddressInterface } from '@interfaces/shared/Address.interface';
+import { CommentInterface } from '@interfaces/shared/Comment.interface';
+import { ContactInformationInterface } from '@interfaces/shared/ContactInformation.interface';
+import { FileInterface } from '@interfaces/shared/File.interface';
+import { InteractionInterface } from '@interfaces/shared/Interaction.interface';
 
 export {
   AddressInterface,

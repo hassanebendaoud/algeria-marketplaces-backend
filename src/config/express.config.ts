@@ -1,7 +1,9 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
 dotenv.config({ path: "env/express.env" });
 
-export const expressConfig = {
+const expressConfig = {
   port: process.env.EXPRESS_PORT,
 };
+
+export default expressConfig;

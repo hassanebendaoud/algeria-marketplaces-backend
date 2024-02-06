@@ -1,7 +1,9 @@
-import mongoose from "mongoose";
-import slugify from "slugify";
-import utils from "../utils";
-import { ProductModel } from "./";
+import mongoose from 'mongoose';
+import slugify from 'slugify';
+
+import utils from '@utils/index';
+
+import { ProductModel } from './';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;

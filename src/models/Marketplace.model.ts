@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import slugify from 'slugify';
 
-import utils from '../utils';
+import utils from '@utils/index';
+
 import MarketplaceModel from './Marketplace.model';
 
 const Schema = mongoose.Schema;

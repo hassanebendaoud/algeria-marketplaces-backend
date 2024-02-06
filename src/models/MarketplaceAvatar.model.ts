@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import { fileConstant } from '../constants';
+import { fileConstant } from '@constants/index';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;

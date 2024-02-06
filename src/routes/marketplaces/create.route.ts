@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { createMarketplaceController } from '../../controllers/marketplaces';
+import { createMarketplaceController } from '@controllers/marketplaces';
 
 const router = Router();
 

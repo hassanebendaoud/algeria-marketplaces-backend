@@ -1,7 +1,8 @@
-import passportJWT from "passport-jwt";
-import fs from "fs";
-import { keysConfig } from "../config/keys.config";
-import { UserModel } from "../models";
+import fs from 'fs';
+import passportJWT from 'passport-jwt';
+
+import { UserModel } from '@/models';
+import { keysConfig } from '@config/index';
 
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;

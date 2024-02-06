@@ -1,16 +1,14 @@
 import { Router } from 'express';
 
-import authMiddleware from '../../middleware/auth.middleware';
-import zodValidateMiddleware from '../../middleware/zodValidate.middleware';
+import marketplacesMiddleware from '@/middleware/marketplaces';
+import authMiddleware from '@middleware/auth/auth.middleware';
+import zodValidateMiddleware from '@middleware/auth/zodValidate.middleware';
+
 import {
-  createMarketplaceSchema,
-  deleteMarketplaceSchema,
-  getAllMarketplacesSchema,
-  getOneByIdMarketplaceSchema,
-  getOneBySlugMarketplaceSchema,
-  getOneByUsernameMarketplaceSchema,
-  updateMarketplaceSchema,
-} from '../../zod/schema/marketplaces';
+    createMarketplaceSchema, deleteMarketplaceSchema, getAllMarketplacesSchema,
+    getOneByIdMarketplaceSchema, getOneBySlugMarketplaceSchema, getOneByUsernameMarketplaceSchema,
+    updateMarketplaceSchema
+} from '../../zod/schemas/marketplaces';
 import createMarketplaceRouter from './create.route';
 import deleteMarketplaceRouter from './delete.route';
 import getAllMarketplacesRouter from './getAll.route';
@@ -29,6 +27,7 @@ router.use(
 router.use(
   "/get-one-by-id",
   zodValidateMiddleware(getOneByIdMarketplaceSchema),
+  marketplacesMiddleware.isIdValid,
   getOneByIdMarketplaceRouter
 );
 router.use(
@@ -46,18 +45,27 @@ router.use(
   "/create",
   authMiddleware,
   zodValidateMiddleware(createMarketplaceSchema),
+  marketplacesMiddleware.isUsernameExists,
+  // marketplacesMiddleware.isSlugExists,
   createMarketplaceRouter
 );
 router.use(
   "/update",
   authMiddleware,
   zodValidateMiddleware(updateMarketplaceSchema),
+  marketplacesMiddleware.isExists,
+  marketplacesMiddleware.isUsernameExists,
+  // marketplacesMiddleware.isSlugExists,
+  marketplacesMiddleware.isOwner,
   updateMarketplaceRouter
 );
 router.use(
   "/delete",
   authMiddleware,
   zodValidateMiddleware(deleteMarketplaceSchema),
+  marketplacesMiddleware.isIdValid,
+  marketplacesMiddleware.isExists,
+  marketplacesMiddleware.isOwner,
   deleteMarketplaceRouter
 );
 

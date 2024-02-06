@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+
+import { fileConstant } from '@constants/index';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
-import fileConstant from "../constants/file.constant";
 
 const schema = new Schema(
   {

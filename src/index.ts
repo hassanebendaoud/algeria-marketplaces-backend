@@ -1,20 +1,17 @@
 import compression from 'compression';
 import cors from 'cors';
-import express, {
-  Request,
-  Response,
-} from 'express';
+import express, { Request, Response } from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import multer from 'multer';
 import passport from 'passport';
 
-import { expressConfig } from './config/express.config';
-import conn from './db/mongo/conn';
-import Passport from './db/passport';
-import authRouter from './routes/auth';
-import marketplacesRouter from './routes/marketplaces';
-import utils from './utils';
+import { expressConfig } from '@config/index';
+import conn from '@db/mongo/conn';
+import Passport from '@db/passport';
+import authRouter from '@routes/auth/index';
+import marketplacesRouter from '@routes/marketplaces';
+import utils from '@utils/index';
 
 const app = express();
 const storage = multer.memoryStorage(); // multer memory storage

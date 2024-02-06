@@ -1,14 +1,8 @@
-import {
-  NextFunction,
-  Request,
-  Response,
-} from 'express';
+import { ObjectId } from 'bson';
+import { NextFunction, Request, Response } from 'express';
 
-import { MarketplaceInterface } from '../../interfaces';
-import {
-  MarketplaceModel,
-  UserModel,
-} from '../../models';
+import { MarketplaceInterface } from '@interfaces/index';
+import { marketplacesQueries, usersQueries } from '@queries/index';
 
 const createMarketplaceController = async (
   req: Request,
@@ -17,28 +11,34 @@ const createMarketplaceController = async (
 ) => {
   try {
     const marketplace: MarketplaceInterface = req.body;
-    const User = marketplace.User;
+    const User = new ObjectId(marketplace.User! as string);
 
     const newMarketplace: MarketplaceInterface = {
       ...marketplace,
     };
 
-    const marketplaceCreated = await MarketplaceModel.create(newMarketplace);
+    const marketplaceCreated = await marketplacesQueries.createQuery({
+      data: newMarketplace,
+    });
 
-    await UserModel.findByIdAndUpdate(
-      User,
-      {
+    await usersQueries.findByIdAndUpdateQuery({
+      _id: User,
+      data: {
         $push: {
           Marketplaces: marketplaceCreated._id,
         },
       },
-      { new: false }
-    );
+      options: {
+        upsert: false,
+        new: true,
+        runValidators: true,
+      },
+    });
 
     return res.status(201).json({
       success: true,
       status: "success",
-      message: "Marketplace created",
+      message: "Marketplace Created",
       data: marketplaceCreated,
     });
   } catch (error: any) {

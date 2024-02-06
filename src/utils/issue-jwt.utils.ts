@@ -1,7 +1,8 @@
-import jwt from "jsonwebtoken";
-import fs from "fs";
-import mongoose from "mongoose";
-import { keysConfig } from "../config/keys.config";
+import fs from 'fs';
+import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
+
+import { keysConfig } from '@config/index';
 
 const issueJWT = (user: { _id: mongoose.Types.ObjectId }) => {
   const pathToPrivateKey = keysConfig.privateKeyPath;

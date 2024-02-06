@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import { deleteMarketplaceController } from '../../controllers/marketplaces';
+import { deleteOneByIdMarketplaceController } from '@controllers/marketplaces';
 
 const router = Router();
 
-router.delete("/", deleteMarketplaceController);
+router.delete("/", deleteOneByIdMarketplaceController);
 
 export default router;

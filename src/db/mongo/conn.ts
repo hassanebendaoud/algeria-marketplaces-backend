@@ -1,5 +1,6 @@
-import { connect } from "mongoose";
-import { mongoConfig } from "../../config/mongo.config";
+import { connect } from 'mongoose';
+
+import { mongoConfig } from '@config/index';
 
 const connectDB = async () => {
   try {

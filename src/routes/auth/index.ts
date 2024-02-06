@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import authMiddleware from '../../middleware/auth.middleware';
-import loginRoute from './login.route';
-import protectRoute from './protect.route';
-import registerRoute from './register.route';
+import authMiddleware from '@middleware/auth/auth.middleware';
+import loginRoute from '@routes/auth/login.route';
+import protectRoute from '@routes/auth/protect.route';
+import registerRoute from '@routes/auth/register.route';
 
 const router = Router();
 
