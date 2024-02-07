@@ -4,7 +4,8 @@ import fs from 'fs';
 import jwt from 'jsonwebtoken';
 import mongoose, { Model } from 'mongoose';
 
-import { MarketplaceInterface, ProductInterface } from '@/interfaces';
+import { MarketplaceInterface } from '@/interfaces/marketplaces.interfaces';
+import { ProductInterface } from '@/interfaces/products.interfaces';
 import { keysConfig } from '@config/index';
 
 const checkKeyPairExist = () => {

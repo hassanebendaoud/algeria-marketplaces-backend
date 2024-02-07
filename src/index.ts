@@ -9,10 +9,10 @@ import passport from 'passport';
 import { expressConfig } from '@config/index';
 import conn from '@db/mongo/conn';
 import Passport from '@db/passport';
-import authRouter from '@routes/auth/index';
-import marketplacesRouter from '@routes/marketplaces';
-import productsRouter from '@routes/products';
-import usersRouter from '@routes/users';
+import authRouter from '@routes/auth.routes';
+import marketplacesRouter from '@routes/marketplaces.routes';
+import productsRouter from '@routes/products.routes';
+import usersRouter from '@routes/users.routes';
 import utils from '@utils/index';
 
 const app = express();

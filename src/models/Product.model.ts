@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import slugify from 'slugify';
 
-import { ProductInterface } from '@/interfaces';
+import { ProductInterface } from '@/interfaces/products.interfaces';
 import utils from '@utils/index';
 
 import { ProductModel } from './';

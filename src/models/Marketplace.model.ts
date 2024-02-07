@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import slugify from 'slugify';
 
-import { MarketplaceInterface } from '@/interfaces';
+import { MarketplaceInterface } from '@/interfaces/marketplaces.interfaces';
 import { MarketplaceModel } from '@models/index';
 import utils from '@utils/index';
 
