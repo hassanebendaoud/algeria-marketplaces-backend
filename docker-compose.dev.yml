@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  mongo_db:
+    container_name: database_container
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_db_data:/data/db
+
+  app:
+    container_name: app_container
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo_db
+    env_file:
+      - env/db.env
+      - env/express.env
+    restart: always
+    volumes:
+      - ./src:/usr/src/app/src
+
+volumes:
+  mongo_db_data: {}

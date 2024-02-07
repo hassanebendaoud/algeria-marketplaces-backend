@@ -1,0 +1,20 @@
+FROM node:alpine
+
+WORKDIR /usr/src/app
+COPY ./package.json ./
+COPY ./pnpm-lock.yaml ./
+
+RUN npm i -g pnpm
+RUN pnpm install
+
+COPY ./src ./src
+
+COPY ./env/db.env ./env
+COPY ./env/express.env ./env
+COPY ./env/jwt.env ./env
+
+COPY tsconfig.json ./
+
+RUN node 
+
+CMD ["pnpm", "dev"]
