@@ -1,13 +1,41 @@
 {
-  "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "outDir": "./dist",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+    "ts-node": {
+        // Do not forget to `npm i -D tsconfig-paths`
+        "require": ["tsconfig-paths/register"]
+    },
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["src/*"],
+            "@controllers/*": ["src/controllers/*"],
+            "@models/*": ["src/models/*"],
+            "@queries/*": ["src/queries/*"],
+            "@routes/*": ["src/routes/*"],
+            "@services/*": ["src/services/*"],
+            "@utils/*": ["src/utils/*"],
+            "@scopes/*": ["src/scopes/*"],
+            "@middleware/*": ["src/middleware/*"],
+            "@config/*": ["src/config/*"],
+            "@validations/*": ["src/validations/*"],
+            "@errors/*": ["src/errors/*"],
+            "@constants/*": ["src/constants/*"],
+            "@interfaces/*": ["src/interfaces/*"],
+            "@zod/*": ["src/zod/*"],
+            "@db/*": ["src/db/*"],
+            "@migrations/*": ["src/migrations/*"],
+            "@seeds/*": ["src/seeds/*"],
+            "@factories/*": ["src/factories/*"],
+            "@tests/*": ["src/tests/*"],
+            "@zod-schemas/*": ["src/zod/schemas/*"]
+        }
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
 }
