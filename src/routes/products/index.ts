@@ -1,69 +1,55 @@
 import { Router } from 'express';
 
+import productsControllers from '@/controllers/products';
 import productsMiddleware from '@/middleware/products';
+import productSchemas from '@/zod/schemas/products';
 import authMiddleware from '@middleware/auth/auth.middleware';
 import zodValidateMiddleware from '@middleware/auth/zodValidate.middleware';
 
-import {
-    createProductSchema, deleteProductSchema, getAllProductsSchema, getOneByIdProductSchema,
-    getOneBySlugProductSchema, getOneByUsernameProductSchema, updateProductSchema
-} from '../../zod/schemas/products';
-import createProductRouter from './create.route';
-import deleteProductRouter from './delete.route';
-import getAllProductsRouter from './getAll.route';
-import getOneByIdProductRouter from './getOneById.route';
-import getOneBySlugProductRouter from './getOneBySlug.route';
-import getOneByUsernameProductRouter from './getOneByUsername.route';
-import updateProductRouter from './update.route';
-
 const router = Router();
 
-router.use(
+router.get(
     '/get-all',
-    zodValidateMiddleware(getAllProductsSchema),
-    getAllProductsRouter
+    zodValidateMiddleware(productSchemas.getAllProductsSchema),
+    productsControllers.getAllProductsController
 );
-router.use(
+router.get(
     '/get-one-by-id',
-    zodValidateMiddleware(getOneByIdProductSchema),
+    zodValidateMiddleware(productSchemas.getOneByIdProductSchema),
     productsMiddleware.isIdValid,
-    getOneByIdProductRouter
-);
-router.use(
-    '/get-one-by-username',
-    zodValidateMiddleware(getOneByUsernameProductSchema),
-    getOneByUsernameProductRouter
-);
-router.use(
-    '/get-one-by-slug',
-    zodValidateMiddleware(getOneBySlugProductSchema),
-    getOneBySlugProductRouter
+    productsControllers.getOneByIdProductController
 );
 
-router.use(
+router.get(
+    '/get-one-by-slug',
+    zodValidateMiddleware(productSchemas.getOneBySlugProductSchema),
+    productsControllers.getOneBySlugProductController
+);
+
+router.post(
     '/create',
     authMiddleware,
-    zodValidateMiddleware(createProductSchema),
+    zodValidateMiddleware(productSchemas.createProductSchema),
     // productsMiddleware.isSlugExists,
-    createProductRouter
+    productsControllers.createProductController
 );
-router.use(
+router.patch(
     '/update',
     authMiddleware,
-    zodValidateMiddleware(updateProductSchema),
+    zodValidateMiddleware(productSchemas.updateProductSchema),
     productsMiddleware.isExists,
     // productsMiddleware.isSlugExists,
     productsMiddleware.isOwner,
-    updateProductRouter
+    productsControllers.updateOneByIdProductController
 );
-router.use(
+router.delete(
     '/delete',
     authMiddleware,
-    zodValidateMiddleware(deleteProductSchema),
+    zodValidateMiddleware(productSchemas.deleteProductSchema),
     productsMiddleware.isIdValid,
     productsMiddleware.isExists,
     productsMiddleware.isOwner,
-    deleteProductRouter
+    productsControllers.deleteOneByIdProductController
 );
 
 export default router;

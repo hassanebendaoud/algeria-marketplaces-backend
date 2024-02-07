@@ -1,67 +1,52 @@
 import { Router } from 'express';
 
+import usersController from '@/controllers/users';
 import usersMiddleware from '@/middleware/users';
+import usersSchemas from '@/zod/schemas/users';
 import authMiddleware from '@middleware/auth/auth.middleware';
 import zodValidateMiddleware from '@middleware/auth/zodValidate.middleware';
 
-import {
-    createUserSchema, deleteUserSchema, getAllUsersSchema, getOneByIdUserSchema,
-    getOneBySlugUserSchema, getOneByUsernameUserSchema, updateUserSchema
-} from '../../zod/schemas/users';
-import createUserRouter from './create.route';
-import deleteUserRouter from './delete.route';
-import getAllUsersRouter from './getAll.route';
-import getOneByIdUserRouter from './getOneById.route';
-import getOneBySlugUserRouter from './getOneBySlug.route';
-import getOneByUsernameUserRouter from './getOneByUsername.route';
-import updateUserRouter from './update.route';
-
 const router = Router();
 
-router.use(
+router.get(
     '/get-all',
-    zodValidateMiddleware(getAllUsersSchema),
-    getAllUsersRouter
+    zodValidateMiddleware(usersSchemas.getAllUsersSchema),
+    usersController.getAllUsersController
 );
-router.use(
+router.get(
     '/get-one-by-id',
-    zodValidateMiddleware(getOneByIdUserSchema),
+    zodValidateMiddleware(usersSchemas.getOneByIdUserSchema),
     usersMiddleware.isIdValid,
-    getOneByIdUserRouter
+    usersController.getOneByIdUserController
 );
-router.use(
+router.get(
     '/get-one-by-username',
-    zodValidateMiddleware(getOneByUsernameUserSchema),
-    getOneByUsernameUserRouter
-);
-router.use(
-    '/get-one-by-slug',
-    zodValidateMiddleware(getOneBySlugUserSchema),
-    getOneBySlugUserRouter
+    zodValidateMiddleware(usersSchemas.getOneByUsernameUserSchema),
+    usersController.getOneByUsernameUserController
 );
 
-router.use(
+router.post(
     '/create',
     authMiddleware,
-    zodValidateMiddleware(createUserSchema),
+    zodValidateMiddleware(usersSchemas.createUserSchema),
     usersMiddleware.isUsernameExists,
-    createUserRouter
+    usersController.createUserController
 );
-router.use(
+router.patch(
     '/update',
     authMiddleware,
-    zodValidateMiddleware(updateUserSchema),
+    zodValidateMiddleware(usersSchemas.updateUserSchema),
     usersMiddleware.isExists,
     usersMiddleware.isUsernameExists,
-    updateUserRouter
+    usersController.updateOneByIdUserController
 );
-router.use(
+router.delete(
     '/delete',
     authMiddleware,
-    zodValidateMiddleware(deleteUserSchema),
+    zodValidateMiddleware(usersSchemas.deleteUserSchema),
     usersMiddleware.isIdValid,
     usersMiddleware.isExists,
-    deleteUserRouter
+    usersController.deleteOneByIdUserController
 );
 
 export default router;

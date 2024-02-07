@@ -1,72 +1,70 @@
 import { Router } from 'express';
 
 import marketplacesMiddleware from '@/middleware/marketplaces';
+import marketplacesControllers from '@controllers/marketplaces/index';
 import authMiddleware from '@middleware/auth/auth.middleware';
 import zodValidateMiddleware from '@middleware/auth/zodValidate.middleware';
-
-import {
-    createMarketplaceSchema, deleteMarketplaceSchema, getAllMarketplacesSchema,
-    getOneByIdMarketplaceSchema, getOneBySlugMarketplaceSchema, getOneByUsernameMarketplaceSchema,
-    updateMarketplaceSchema
-} from '../../zod/schemas/marketplaces';
-import createMarketplaceRouter from './create.route';
-import deleteMarketplaceRouter from './delete.route';
-import getAllMarketplacesRouter from './getAll.route';
-import getOneByIdMarketplaceRouter from './getOneById.route';
-import getOneBySlugMarketplaceRouter from './getOneBySlug.route';
-import getOneByUsernameMarketplaceRouter from './getOneByUsername.route';
-import updateMarketplaceRouter from './update.route';
+import marketplacesSchemas from '@zod-schemas/marketplaces';
 
 const router = Router();
 
-router.use(
+router.get(
     '/get-all',
-    zodValidateMiddleware(getAllMarketplacesSchema),
-    getAllMarketplacesRouter
-);
-router.use(
-    '/get-one-by-id',
-    zodValidateMiddleware(getOneByIdMarketplaceSchema),
-    marketplacesMiddleware.isIdValid,
-    getOneByIdMarketplaceRouter
-);
-router.use(
-    '/get-one-by-username',
-    zodValidateMiddleware(getOneByUsernameMarketplaceSchema),
-    getOneByUsernameMarketplaceRouter
-);
-router.use(
-    '/get-one-by-slug',
-    zodValidateMiddleware(getOneBySlugMarketplaceSchema),
-    getOneBySlugMarketplaceRouter
+    zodValidateMiddleware(marketplacesSchemas.getAllMarketplacesSchema),
+    marketplacesControllers.getAllMarketplacesController
 );
 
-router.use(
+router.get(
+    '/get-one-by-id',
+    zodValidateMiddleware(marketplacesSchemas.getOneByIdMarketplacesSchema),
+    marketplacesMiddleware.isIdValid,
+    marketplacesControllers.getOneByIdMarketplaceController
+);
+
+router.get('/');
+
+router.get(
+    '/get-one-by-username',
+    zodValidateMiddleware(
+        marketplacesSchemas.getOneByUsernameMarketplacesSchema
+    ),
+    marketplacesControllers.getOneByUsernameMarketplaceController
+);
+
+router.get(
+    '/get-one-by-slug',
+    zodValidateMiddleware(marketplacesSchemas.getOneBySlugMarketplacesSchema),
+    marketplacesControllers.getOneBySlugMarketplaceController
+);
+
+router.post(
     '/create',
     authMiddleware,
-    zodValidateMiddleware(createMarketplaceSchema),
+    zodValidateMiddleware(marketplacesSchemas.createMarketplacesSchema),
     marketplacesMiddleware.isUsernameExists,
     // marketplacesMiddleware.isSlugExists,
-    createMarketplaceRouter
+    marketplacesControllers.createMarketplaceController
 );
-router.use(
+
+router.patch(
     '/update',
     authMiddleware,
-    zodValidateMiddleware(updateMarketplaceSchema),
+    zodValidateMiddleware(marketplacesSchemas.updateMarketplacesSchema),
     marketplacesMiddleware.isExists,
     marketplacesMiddleware.isUsernameExists,
     // marketplacesMiddleware.isSlugExists,
     marketplacesMiddleware.isOwner,
-    updateMarketplaceRouter
+    marketplacesControllers.updateOneByIdMarketplaceController
 );
-router.use(
+
+router.delete(
     '/delete',
     authMiddleware,
-    zodValidateMiddleware(deleteMarketplaceSchema),
+    zodValidateMiddleware(marketplacesSchemas.deleteMarketplacesSchema),
     marketplacesMiddleware.isIdValid,
     marketplacesMiddleware.isExists,
     marketplacesMiddleware.isOwner,
-    deleteMarketplaceRouter
+    marketplacesControllers.deleteOneByIdMarketplaceController
 );
 
 export default router;

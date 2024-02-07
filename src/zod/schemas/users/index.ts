@@ -1,9 +1,102 @@
-export { default as getAllUsersSchema } from '@zod-schemas/users/getAll.schema';
+import { ObjectId } from 'bson';
+import { z } from 'zod';
 
-export { default as getOneByIdUserSchema } from '@zod-schemas/users/getOneById.schema';
-export { default as getOneByUsernameUserSchema } from '@zod-schemas/users/getOneByUsername.schema';
-export { default as getOneBySlugUserSchema } from '@zod-schemas/users/getOneBySlug.schema';
+const createUserSchema = z.strictObject(
+    {
+        body: z.strictObject({
+            firstName: z.string().min(3).max(100),
+            lastName: z.string().min(3).max(100),
+            username: z.string(),
+            email: z.string().email(),
+            password: z.string().min(6).max(100),
+            gender: z.string().optional(),
+            dateBirthday: z.string().optional(),
+        }),
+        query: z.strictObject({}),
+        params: z.strictObject({}),
+    },
+    {
+        description: 'Create User Schema',
+    }
+);
+const deleteUserSchema = z.strictObject(
+    {
+        body: z.strictObject({}),
+        query: z.strictObject({
+            userId: z.string().refine((val) => ObjectId.isValid(val)),
+        }),
+        params: z.strictObject({}),
+    },
+    {
+        description: 'Delete User Schema',
+    }
+);
+const getAllUsersSchema = z.strictObject(
+    {
+        body: z.strictObject({}),
+        query: z.strictObject({
+            page: z.string(),
+            size: z.string(),
+        }),
+        params: z.strictObject({}),
+    },
+    {
+        description: 'Get All Users Schema',
+    }
+);
+const getOneByIdUserSchema = z.strictObject(
+    {
+        body: z.strictObject({}),
+        query: z.strictObject({
+            userId: z.string().refine((val) => ObjectId.isValid(val)),
+        }),
+        params: z.strictObject({}),
+    },
+    {
+        description: 'Get One User Schema',
+    }
+);
 
-export { default as createUserSchema } from '@zod-schemas/users/create.schema';
-export { default as updateUserSchema } from '@zod-schemas/users/update.schema';
-export { default as deleteUserSchema } from '@zod-schemas/users/delete.schema';
+const getOneByUsernameUserSchema = z.strictObject(
+    {
+        body: z.strictObject({}),
+        query: z.strictObject({
+            userUsername: z.string(),
+        }),
+        params: z.strictObject({}),
+    },
+    {
+        description: 'Get One User Schema',
+    }
+);
+const updateUserSchema = z.strictObject(
+    {
+        body: z.strictObject({
+            firstName: z.string().min(3).max(100),
+            lastName: z.string().min(3).max(100),
+            username: z.string(),
+            email: z.string().email(),
+            password: z.string().min(6).max(100),
+            gender: z.string().optional(),
+            dateBirthday: z.string().optional(),
+        }),
+        query: z.strictObject({
+            userId: z.string().refine((val) => ObjectId.isValid(val)),
+        }),
+        params: z.strictObject({}),
+    },
+    {
+        description: 'Update User Schema',
+    }
+);
+
+const usersSchemas = {
+    createUserSchema,
+    deleteUserSchema,
+    getAllUsersSchema,
+    getOneByIdUserSchema,
+    getOneByUsernameUserSchema,
+    updateUserSchema,
+};
+
+export default usersSchemas;

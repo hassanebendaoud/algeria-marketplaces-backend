@@ -114,7 +114,7 @@ const getAllMarketplacesController = async (req: Request, res: Response) => {
     }
 };
 
-const getOneByIdMarketplaceController = async (req: Request, res: Response) => {
+const getOneByIdController = async (req: Request, res: Response) => {
     try {
         const marketplaceId = req.query.marketplaceId! as string;
         const marketplace = await marketplacesQueries.findByIdQuery({
@@ -245,7 +245,7 @@ const marketplacesControllers = {
     createMarketplaceController,
     deleteOneByIdMarketplaceController,
     getAllMarketplacesController,
-    getOneByIdMarketplaceController,
+    getOneByIdController,
     getOneBySlugMarketplaceController,
     getOneByUsernameMarketplaceController,
     updateOneByIdMarketplaceController,
