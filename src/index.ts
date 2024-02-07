@@ -21,8 +21,10 @@ const upload = multer({
     storage,
 });
 
+const startTime = Date.now();
+
 conn();
-utils.generateKeyPair();
+utils.generateKeyPairIfNotExist();
 utils.checkKeyPairExist();
 
 const port = expressConfig.port;
@@ -30,17 +32,14 @@ if (!port) {
     throw new Error('Express Port is required');
 }
 
-console.log(`Express Port: ${port}`);
+console.log(`Express will be running on port ${port}`);
 
 Passport(passport);
 app.use(passport.initialize());
 
 app.use(helmet()); // helmet middleware
-
 app.use(compression()); // compression middleware
-
 app.use(morgan('dev')); // morgan middleware
-
 // Instead of using body-parser middleware, use the new Express implementation of the same thing
 app.use(express.json()); // parse application/json
 app.use(express.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded

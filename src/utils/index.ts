@@ -78,6 +78,15 @@ const generateKeyPair = () => {
     console.log(`Private key is saved to ${privateKeyPath}`);
 };
 
+const generateKeyPairIfNotExist = () => {
+    const publicKeyPath = keysConfig.publicKeyPath;
+    const privateKeyPath = keysConfig.privateKeyPath;
+
+    if (!fs.existsSync(publicKeyPath) || !fs.existsSync(privateKeyPath)) {
+        generateKeyPair();
+    }
+};
+
 const generatePassword = (password: string) => {
     const salt = crypto.randomBytes(32).toString('hex');
     const genHash = crypto
@@ -161,6 +170,7 @@ const utils = {
     validPassword,
     issueJWT,
     generateKeyPair,
+    generateKeyPairIfNotExist,
     checkKeyPairExist,
     createUniqueSlug,
     pagination: {
