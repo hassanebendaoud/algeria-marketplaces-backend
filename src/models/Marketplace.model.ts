@@ -32,10 +32,12 @@ const schema = new Schema<MarketplaceInterface>(
             ref: 'User',
             required: true,
         },
-        SocialMedia: {
-            type: Schema.Types.ObjectId,
-            ref: 'MarketplaceSocialMedia',
-        },
+        SocialMedias: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'MarketplaceSocialMedia',
+            },
+        ],
 
         Products: [
             {

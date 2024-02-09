@@ -34,7 +34,7 @@ export interface MarketplaceInterface {
         | string
     )[];
     Addresses?: (MarketplaceAddressInterface | ObjectId | string)[];
-    SocialMedia?: (MarketplaceSocialMediaInterface | ObjectId | string)[];
+    SocialMedias?: (MarketplaceSocialMediaInterface | ObjectId | string)[];
 
     Comments?: (MarketplaceCommentInterface | ObjectId | string)[];
     Reviews?: (MarketplaceReviewInterface | ObjectId | string)[];
@@ -59,14 +59,14 @@ export interface MarketplaceContactInformationInterface
     extends ContactInformationInterface {
     Marketplaces: (MarketplaceInterface | ObjectId | string)[];
 }
-export interface MarketplaceCoverInterface {
-    Marketplace: MarketplaceInterface | ObjectId | string;
+export interface MarketplaceCoverInterface extends FileInterface {
+    Marketplaces: (MarketplaceInterface | ObjectId | string)[];
 }
 export interface MarketplaceFavoriteInterface
     extends MarketplaceInteractionInterface {
     Marketplace: MarketplaceInterface | ObjectId | string;
 }
-export interface MarketplaceImageInterface {
+export interface MarketplaceImageInterface extends FileInterface {
     Marketplace: MarketplaceInterface | ObjectId | string;
 }
 export interface MarketplaceInteractionInterface extends InteractionInterface {

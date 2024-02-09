@@ -1,9 +1,10 @@
+import { ProductFavoriteInterface } from '@/interfaces/products.interfaces';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const schema = new Schema(
+const schema = new Schema<ProductFavoriteInterface>(
     {
         User: {
             type: Schema.Types.ObjectId,
@@ -20,4 +21,4 @@ const schema = new Schema(
     { timestamps: true }
 );
 
-export default model('ProductFavorite', schema);
+export default model<ProductFavoriteInterface>('ProductFavorite', schema);

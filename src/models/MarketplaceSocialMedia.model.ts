@@ -1,9 +1,10 @@
+import { MarketplaceSocialMediaInterface } from '@/interfaces/marketplaces.interfaces';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const schema = new Schema(
+const schema = new Schema<MarketplaceSocialMediaInterface>(
     {
         name: {
             type: String,
@@ -44,4 +45,7 @@ const schema = new Schema(
     { timestamps: true }
 );
 
-export default model('MarketplaceSocialMedia', schema);
+export default model<MarketplaceSocialMediaInterface>(
+    'MarketplaceSocialMedia',
+    schema
+);

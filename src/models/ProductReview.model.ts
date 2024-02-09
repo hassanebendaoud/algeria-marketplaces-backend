@@ -1,9 +1,10 @@
+import { ProductReviewInterface } from '@/interfaces/products.interfaces';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const schema = new Schema(
+const schema = new Schema<ProductReviewInterface>(
     {
         star: {
             type: Number,
@@ -28,4 +29,4 @@ const schema = new Schema(
     { timestamps: true }
 );
 
-export default model('ProductReview', schema);
+export default model<ProductReviewInterface>('ProductReview', schema);

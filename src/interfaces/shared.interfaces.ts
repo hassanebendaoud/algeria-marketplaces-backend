@@ -94,7 +94,7 @@ export interface InteractionInterface {
 export interface ReviewInterface {
     id: string;
 
-    start: number;
+    star: number;
     content: string;
 
     User: UserInterface | ObjectId | string;

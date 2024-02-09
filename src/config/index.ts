@@ -7,3 +7,4 @@ export { default as zodConfig } from '@config/zod.config';
 export { default as corsConfig } from '@config/cors.config';
 export { default as helmetConfig } from '@config/helmet.config';
 export { default as rateLimitConfig } from '@config/rateLimit.config';
+export { default as apiConfig } from '@config/api.config';

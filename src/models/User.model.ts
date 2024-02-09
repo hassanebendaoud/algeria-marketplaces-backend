@@ -1,9 +1,10 @@
+import { UserInterface } from '@/interfaces/users.interface';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const schema = new mongoose.Schema(
+const schema = new Schema<UserInterface>(
     {
         firstName: {
             type: String,
@@ -142,4 +143,4 @@ const schema = new mongoose.Schema(
     { timestamps: true }
 );
 
-export default model('User', schema);
+export default model<UserInterface>('User', schema);

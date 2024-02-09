@@ -1,9 +1,10 @@
+import { MarketplaceReviewInterface } from '@/interfaces/marketplaces.interfaces';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const schema = new Schema(
+const schema = new Schema<MarketplaceReviewInterface>(
     {
         star: {
             type: Number,
@@ -13,7 +14,6 @@ const schema = new Schema(
             type: String,
             required: true,
         },
-
         User: {
             type: Schema.Types.ObjectId,
             ref: 'User',
@@ -28,4 +28,4 @@ const schema = new Schema(
     { timestamps: true }
 );
 
-export default model('MarketplaceReview', schema);
+export default model<MarketplaceReviewInterface>('MarketplaceReview', schema);

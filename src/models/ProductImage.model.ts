@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
 
 import { fileConstant } from '@constants/index';
+import { ProductImageInterface } from '@/interfaces/products.interfaces';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const schema = new Schema(
+const schema = new Schema<ProductImageInterface>(
     {
         ...fileConstant,
 
@@ -14,14 +15,11 @@ const schema = new Schema(
             ref: 'User',
             required: true,
         },
-
-        Products: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Product',
-                required: true,
-            },
-        ],
+        Product: {
+            type: Schema.Types.ObjectId,
+            ref: 'Product',
+            required: true,
+        },
     },
     { timestamps: true }
 );

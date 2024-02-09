@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
 
 import { fileConstant } from '@constants/index';
+import { MarketplaceVideoInterface } from '@/interfaces/marketplaces.interfaces';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const schema = new Schema(
+const schema = new Schema<MarketplaceVideoInterface>(
     {
         ...fileConstant,
 
@@ -13,12 +14,10 @@ const schema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'User',
         },
-        Listings: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Listing',
-            },
-        ],
+        Marketplace: {
+            type: Schema.Types.ObjectId,
+            ref: 'Listing',
+        },
     },
     { timestamps: true }
 );

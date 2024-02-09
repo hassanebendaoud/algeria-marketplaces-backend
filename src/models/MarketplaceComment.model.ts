@@ -1,9 +1,10 @@
+import { MarketplaceCommentInterface } from '@/interfaces/marketplaces.interfaces';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const schema = new Schema(
+const schema = new Schema<MarketplaceCommentInterface>(
     {
         title: {
             type: String,
@@ -28,4 +29,4 @@ const schema = new Schema(
     { timestamps: true }
 );
 
-export default model('MarketplaceComment', schema);
+export default model<MarketplaceCommentInterface>('MarketplaceComment', schema);

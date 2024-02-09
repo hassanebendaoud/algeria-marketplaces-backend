@@ -1,9 +1,10 @@
+import { ProductVoteInterface } from '@/interfaces/products.interfaces';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const schema = new Schema(
+const schema = new Schema<ProductVoteInterface>(
     {
         User: {
             type: Schema.Types.ObjectId,
@@ -19,4 +20,4 @@ const schema = new Schema(
     { timestamps: true }
 );
 
-export default model('ProductVote', schema);
+export default model<ProductVoteInterface>('ProductVote', schema);

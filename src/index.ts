@@ -7,7 +7,7 @@ import multer from 'multer';
 import passport from 'passport';
 import routes from '@routes/index';
 
-import { expressConfig } from '@config/index';
+import { apiConfig, expressConfig } from '@config/index';
 import conn from '@db/mongo/conn';
 import Passport from '@db/passport';
 import utils from '@utils/index';
@@ -50,7 +50,10 @@ app.get('/', (req: Request, res: Response) => {
     res.send('Hellow People!');
 });
 
-app.use('/api', routes);
+const apiPrefix = apiConfig.apiPrefix;
+const apiVersion = apiConfig.apiVersion;
+
+app.use(`/${apiPrefix}/${apiVersion}/`, routes);
 
 app.listen(port, () => {
     const endTime = Date.now();

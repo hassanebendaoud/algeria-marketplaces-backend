@@ -1,9 +1,10 @@
+import { MarketplaceVoteInterface } from '@/interfaces/marketplaces.interfaces';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const schema = new Schema(
+const schema = new Schema<MarketplaceVoteInterface>(
     {
         User: {
             type: Schema.Types.ObjectId,
@@ -19,4 +20,4 @@ const schema = new Schema(
     { timestamps: true }
 );
 
-export default model('MarketplaceVote', schema);
+export default model<MarketplaceVoteInterface>('MarketplaceVote', schema);

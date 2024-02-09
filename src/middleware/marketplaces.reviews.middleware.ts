@@ -24,7 +24,6 @@ const isExists = async (req: Request, res: Response, next: NextFunction) => {
 
     return next();
 };
-
 const isIdValid = async (req: Request, res: Response, next: NextFunction) => {
     const marketplaceReviewId = req.query.marketplaceReviewId! as string;
 

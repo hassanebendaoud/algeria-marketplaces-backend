@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
 
 import { fileConstant } from '@constants/index';
+import { MarketplaceCoverInterface } from '@/interfaces/marketplaces.interfaces';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const schema = new Schema(
+const schema = new Schema<MarketplaceCoverInterface>(
     {
         ...fileConstant,
 
@@ -26,4 +27,4 @@ const schema = new Schema(
     { timestamps: true }
 );
 
-export default model('MarketplaceCover', schema);
+export default model<MarketplaceCoverInterface>('MarketplaceCover', schema);
