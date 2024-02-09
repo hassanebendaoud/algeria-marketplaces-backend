@@ -25,6 +25,8 @@ export interface AddressInterface {
     state?: StateAddressInterface;
     city?: CityAddressInterface;
 
+    User: UserInterface | ObjectId | string;
+
     createdAt: Date;
     updatedAt: Date;
 }
@@ -60,7 +62,7 @@ export interface ContactInformationInterface {
     emails: EmailContactInformationInterface[];
     phoneNumbers: PhoneNumberContactInformationInterface[];
 
-    User: ObjectId | string;
+    User: UserInterface | ObjectId | string;
 
     createdAt: Date;
     updatedAt: Date;

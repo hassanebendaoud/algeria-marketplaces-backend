@@ -1,15 +1,26 @@
 import { Request, Response } from 'express';
 
-import marketplacesQueries from '@/queries/marketplaces.queries';
-import usersQueries from '@/queries/users.queries';
 import { ExpressUserType } from '@/types/express.types';
 import utils from '@/utils';
-import { MarketplaceInterface } from '@interfaces/marketplaces.interfaces';
+import { MarketplaceAddressInterface } from '@interfaces/marketplaces.interfaces';
+import marketplacesAddressesQueries from '@queries/marketplaces.addresses.queries';
+import usersQueries from '@queries/users.queries';
+import marketplacesQueries from '@/queries/marketplaces.queries';
 
-const createMarketplaceController = async (req: Request, res: Response) => {
+const createMarketplaceAddressController = async (
+    req: Request,
+    res: Response
+) => {
     try {
-        // Get the marketplace from the request body
-        const marketplace: MarketplaceInterface = req.body;
+        // Get the marketplaceAddress from the request body
+        const marketplaceAddress: MarketplaceAddressInterface = req.body;
+
+        let marketplaceIds = req.query.marketplaceId! as string[];
+        marketplaceIds =
+            typeof marketplaceIds === 'string'
+                ? [marketplaceIds]
+                : marketplaceIds;
+        console.log('marketplaceId', marketplaceIds);
 
         // This is the user that is logged in
         const user = req.user! as ExpressUserType;
@@ -17,20 +28,26 @@ const createMarketplaceController = async (req: Request, res: Response) => {
         // This is the id of the user that is logged in
         const userId = user._id.toString() as string;
 
-        const newMarketplace: MarketplaceInterface = {
-            ...marketplace,
+        const newMarketplaceAddress: MarketplaceAddressInterface = {
+            ...marketplaceAddress,
             User: userId,
         };
 
-        const marketplaceCreated = await marketplacesQueries.createQuery({
-            data: newMarketplace,
-        });
+        if (marketplaceIds) {
+            newMarketplaceAddress.Marketplaces = marketplaceIds;
+        }
 
+        const marketplaceAddressCreated =
+            await marketplacesAddressesQueries.createQuery({
+                data: newMarketplaceAddress,
+            });
+
+        // Update the user with the new address
         await usersQueries.findByIdAndUpdateQuery({
             _id: userId,
             update: {
                 $push: {
-                    Marketplaces: marketplaceCreated._id,
+                    MarketplaceAddresses: marketplaceAddressCreated._id,
                 },
             },
             options: {
@@ -40,32 +57,48 @@ const createMarketplaceController = async (req: Request, res: Response) => {
             },
         });
 
+        // update the marketplace with the new marketplace address created
+        await marketplacesQueries.updateManyQuery({
+            filter: {
+                _id: { $in: marketplaceIds },
+            },
+            update: {
+                $push: {
+                    Addresses: marketplaceAddressCreated._id,
+                },
+            },
+            options: {
+                runValidators: true,
+            },
+        });
+
         return res.status(201).json({
             success: true,
             status: 'success',
-            message: 'Marketplace Created',
-            data: marketplaceCreated,
+            message: 'Marketplace Address Created',
+            data: marketplaceAddressCreated,
         });
     } catch (error: unknown) {
         utils.handleCatchErrorResponse(error, res);
     }
 };
 
-const deleteOneByIdMarketplaceController = async (
+const deleteOneByIdMarketplaceAddressController = async (
     req: Request,
     res: Response
 ) => {
     try {
-        const marketplaceId = req.query.marketplaceId;
+        const marketplaceAddressId = req.query.marketplaceAddressId;
 
-        const marketplaceDeleted = await marketplacesQueries.deleteOneQuery({
-            filter: { _id: marketplaceId },
-        });
+        const marketplaceAddressDeleted =
+            await marketplacesAddressesQueries.deleteOneQuery({
+                filter: { _id: marketplaceAddressId },
+            });
 
         await usersQueries.findOneAndUpdateQuery({
-            filter: { Marketplaces: marketplaceId },
+            filter: { Addresses: marketplaceAddressId },
             update: {
-                $pull: { Marketplaces: marketplaceId },
+                $pull: { Addresses: marketplaceAddressId },
             },
             options: {},
         });
@@ -73,15 +106,18 @@ const deleteOneByIdMarketplaceController = async (
         return res.status(200).json({
             success: true,
             status: 'success',
-            message: 'Marketplace Deleted',
-            data: marketplaceDeleted,
+            message: 'Marketplace Address Deleted',
+            data: marketplaceAddressDeleted,
         });
     } catch (error: unknown) {
         utils.handleCatchErrorResponse(error, res);
     }
 };
 
-const getAllMarketplacesController = async (req: Request, res: Response) => {
+const getAllMarketplacesAddressesController = async (
+    req: Request,
+    res: Response
+) => {
     const { page, size } = req.query;
 
     const options = {
@@ -90,7 +126,7 @@ const getAllMarketplacesController = async (req: Request, res: Response) => {
     };
 
     try {
-        const data = await marketplacesQueries.findAllQuery({
+        const data = await marketplacesAddressesQueries.findAllQuery({
             filter: {},
             select: '',
             populate: {
@@ -115,115 +151,55 @@ const getAllMarketplacesController = async (req: Request, res: Response) => {
     }
 };
 
-const getOneByIdController = async (req: Request, res: Response) => {
+const getOneByIdMarketplaceAddressController = async (
+    req: Request,
+    res: Response
+) => {
     try {
-        const marketplaceId = req.query.marketplaceId! as string;
-        const marketplace = await marketplacesQueries.findByIdQuery({
-            filter: {
-                _id: marketplaceId,
-            },
-            select: '',
-        });
+        const marketplaceAddressId = req.query.marketplaceAddressId! as string;
+        const marketplaceAddress =
+            await marketplacesAddressesQueries.findByIdQuery({
+                filter: {
+                    _id: marketplaceAddressId,
+                },
+                select: '',
+            });
 
-        if (!marketplace) {
+        if (!marketplaceAddress) {
             return res.status(404).json({
                 success: false,
                 status: 'error',
-                message: 'Marketplace not found',
+                message: 'Marketplace Address not found',
             });
         }
 
         return res.status(200).json({
             success: true,
             status: 'success',
-            message: 'Marketplace found',
-            data: marketplace,
+            message: 'Marketplace Address found',
+            data: marketplaceAddress,
         });
     } catch (error: unknown) {
         utils.handleCatchErrorResponse(error, res);
     }
 };
 
-const getOneBySlugMarketplaceController = async (
+const updateOneByIdMarketplaceAddressController = async (
     req: Request,
     res: Response
 ) => {
     try {
-        const marketplaceSlug = req.query.marketplaceSlug! as string;
+        const marketplaceAddress: MarketplaceAddressInterface = req.body;
+        const marketplaceAddressId = req.query.marketplaceAddressId! as string;
 
-        const marketplace = await marketplacesQueries.findOneQuery({
-            filter: { slug: marketplaceSlug },
-            select: '',
-        });
-
-        if (!marketplace) {
-            return res.status(404).json({
-                success: false,
-                status: 'error',
-                message: 'Marketplace not found',
-            });
-        }
-
-        return res.status(200).json({
-            success: true,
-            status: 'success',
-            message: 'Marketplace found',
-            data: marketplace,
-        });
-    } catch (error: unknown) {
-        utils.handleCatchErrorResponse(error, res);
-    }
-};
-
-const getOneByUsernameMarketplaceController = async (
-    req: Request,
-    res: Response
-) => {
-    try {
-        const marketplaceUsername = req.query.marketplaceUsername! as string;
-
-        const marketplace = await marketplacesQueries.findOneQuery({
-            filter: {
-                username: marketplaceUsername,
-            },
-            select: '',
-        });
-
-        if (!marketplace) {
-            return res.status(404).json({
-                success: false,
-                status: 'error',
-                message: 'Marketplace not found',
-            });
-        }
-
-        return res.status(200).json({
-            success: true,
-            status: 'success',
-            message: 'Marketplace found',
-            data: marketplace,
-        });
-    } catch (error: unknown) {
-        utils.handleCatchErrorResponse(error, res);
-    }
-};
-
-const updateOneByIdMarketplaceController = async (
-    req: Request,
-    res: Response
-) => {
-    try {
-        const marketplace: MarketplaceInterface = req.body;
-        const marketplaceId = req.query.marketplaceId! as string;
-
-        const putMarketplace: MarketplaceInterface = {
-            ...marketplace,
+        const putAddress: MarketplaceAddressInterface = {
+            ...marketplaceAddress,
         };
 
-        const marketplaceUpdated =
-            await marketplacesQueries.findByIdAndUpdateQuery({
-                _id: marketplaceId,
-                update: putMarketplace,
+        const marketplaceAddressUpdated =
+            await marketplacesAddressesQueries.findByIdAndUpdateQuery({
+                _id: marketplaceAddressId,
+                update: putAddress,
                 options: {
                     upsert: false,
                     new: true,
@@ -234,22 +210,20 @@ const updateOneByIdMarketplaceController = async (
         return res.status(201).json({
             success: true,
             status: 'success',
-            message: 'Marketplace Updated',
-            data: marketplaceUpdated,
+            message: 'Marketplace Address Updated',
+            data: marketplaceAddressUpdated,
         });
     } catch (error: unknown) {
         utils.handleCatchErrorResponse(error, res);
     }
 };
 
-const marketplacesControllers = {
-    createMarketplaceController,
-    deleteOneByIdMarketplaceController,
-    getAllMarketplacesController,
-    getOneByIdController,
-    getOneBySlugMarketplaceController,
-    getOneByUsernameMarketplaceController,
-    updateOneByIdMarketplaceController,
+const marketplacesAddressesControllers = {
+    createMarketplaceAddressController,
+    deleteOneByIdMarketplaceAddressController,
+    getAllMarketplacesAddressesController,
+    getOneByIdMarketplaceAddressController,
+    updateOneByIdMarketplaceAddressController,
 };
 
-export default marketplacesControllers;
+export default marketplacesAddressesControllers;

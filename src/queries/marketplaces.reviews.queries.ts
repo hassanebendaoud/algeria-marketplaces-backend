@@ -1,26 +1,26 @@
-import { MarketplaceAddressModel } from '@/models';
+import { MarketplaceReviewModel } from '@/models';
 import {
-    createMarketplacesAddressesQueryType,
-    deleteOneMarketplacesAddressesQueryType,
-    findAllMarketplacesAddressesQueryType,
-    findByIdAndUpdateMarketplacesAddressesQueryType,
-    findByIdMarketplacesAddressesQueryType,
-    findOneAndUpdateMarketplacesAddressesQueryType,
-    findOneMarketplacesAddressesQueryType,
-    updateOneMarketplacesAddressesQueryType,
-} from '@/types/marketplaces.addresses.types';
+    createMarketplacesReviewsQueryType,
+    deleteOneMarketplacesReviewsQueryType,
+    findAllMarketplacesReviewsQueryType,
+    findByIdAndUpdateMarketplacesReviewsQueryType,
+    findByIdMarketplacesReviewsQueryType,
+    findOneAndUpdateMarketplacesReviewsQueryType,
+    findOneMarketplacesReviewsQueryType,
+    updateOneMarketplacesReviewsQueryType,
+} from '@/types/marketplaces.reviews.types';
 import utils from '@/utils';
 
-const createQuery = async ({ data }: createMarketplacesAddressesQueryType) => {
-    const recordCreated = await MarketplaceAddressModel.create(data);
+const createQuery = async ({ data }: createMarketplacesReviewsQueryType) => {
+    const recordCreated = await MarketplaceReviewModel.create(data);
     return recordCreated;
 };
 
 const deleteOneQuery = async ({
     filter,
     options,
-}: deleteOneMarketplacesAddressesQueryType) => {
-    const recordDeleted = await MarketplaceAddressModel.deleteOne(
+}: deleteOneMarketplacesReviewsQueryType) => {
+    const recordDeleted = await MarketplaceReviewModel.deleteOne(
         filter,
         options
     );
@@ -35,11 +35,11 @@ const findAllQuery = async ({
     select = '',
     paginationOptions = { page: 1, size: 10 },
     sort = { createdAt: -1 },
-}: findAllMarketplacesAddressesQueryType) => {
+}: findAllMarketplacesReviewsQueryType) => {
     const { page, size } = paginationOptions;
     const { limit, skip } = utils.pagination.getPagination(page, size);
 
-    const rows = await MarketplaceAddressModel.find(filter)
+    const rows = await MarketplaceReviewModel.find(filter)
         .select(select)
         .populate(
             populate.path,
@@ -50,7 +50,7 @@ const findAllQuery = async ({
         .skip(skip)
         .limit(limit)
         .sort(sort);
-    const count = await MarketplaceAddressModel.countDocuments(filter);
+    const count = await MarketplaceReviewModel.countDocuments(filter);
     const { totalItems, totalPages, currentPage } =
         utils.pagination.getPagingData(count, page, limit);
 
@@ -69,8 +69,8 @@ const findByIdQuery = async ({
         path: '',
     },
     select,
-}: findByIdMarketplacesAddressesQueryType) => {
-    const data = await MarketplaceAddressModel.findById(_id)
+}: findByIdMarketplacesReviewsQueryType) => {
+    const data = await MarketplaceReviewModel.findById(_id)
         .select(select)
         .populate(
             populate?.path,
@@ -85,8 +85,8 @@ const findByIdAndUpdateQuery = async ({
     _id,
     update,
     options,
-}: findByIdAndUpdateMarketplacesAddressesQueryType) => {
-    const recordUpdated = await MarketplaceAddressModel.findByIdAndUpdate(
+}: findByIdAndUpdateMarketplacesReviewsQueryType) => {
+    const recordUpdated = await MarketplaceReviewModel.findByIdAndUpdate(
         _id,
         update,
         options
@@ -100,8 +100,8 @@ const findOneQuery = async ({
         path: '',
     },
     select,
-}: findOneMarketplacesAddressesQueryType) => {
-    const data = await MarketplaceAddressModel.findOne(filter)
+}: findOneMarketplacesReviewsQueryType) => {
+    const data = await MarketplaceReviewModel.findOne(filter)
         .select(select)
         .populate(
             populate.path,
@@ -116,8 +116,8 @@ const findOneAndUpdateQuery = async ({
     filter,
     update,
     options,
-}: findOneAndUpdateMarketplacesAddressesQueryType) => {
-    const recordUpdated = await MarketplaceAddressModel.findOneAndUpdate(
+}: findOneAndUpdateMarketplacesReviewsQueryType) => {
+    const recordUpdated = await MarketplaceReviewModel.findOneAndUpdate(
         filter,
         update,
         options
@@ -129,8 +129,8 @@ const updateOneQuery = async ({
     filter,
     update,
     options,
-}: updateOneMarketplacesAddressesQueryType) => {
-    const recordUpdated = await MarketplaceAddressModel.updateOne(
+}: updateOneMarketplacesReviewsQueryType) => {
+    const recordUpdated = await MarketplaceReviewModel.updateOne(
         filter,
         update,
         options
@@ -138,7 +138,7 @@ const updateOneQuery = async ({
     return recordUpdated;
 };
 
-const marketplacesAddressesQueries = {
+const marketplacesReviewsQueries = {
     createQuery,
     updateOneQuery,
     deleteOneQuery,
@@ -150,4 +150,4 @@ const marketplacesAddressesQueries = {
     findOneAndUpdateQuery,
 };
 
-export default marketplacesAddressesQueries;
+export default marketplacesReviewsQueries;

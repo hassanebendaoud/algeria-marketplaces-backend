@@ -5,23 +5,19 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import multer from 'multer';
 import passport from 'passport';
+import routes from '@routes/index';
 
 import { expressConfig } from '@config/index';
 import conn from '@db/mongo/conn';
 import Passport from '@db/passport';
-import authRouter from '@routes/auth.routes';
-import marketplacesRouter from '@routes/marketplaces.routes';
-import productsRouter from '@routes/products.routes';
-import usersRouter from '@routes/users.routes';
 import utils from '@utils/index';
+const startTime = Date.now();
 
 const app = express();
 const storage = multer.memoryStorage(); // multer memory storage
 const upload = multer({
     storage,
 });
-
-const startTime = Date.now();
 
 conn();
 utils.generateKeyPairIfNotExist();
@@ -54,11 +50,10 @@ app.get('/', (req: Request, res: Response) => {
     res.send('Hellow People!');
 });
 
-app.use('/auth', authRouter);
-app.use('/users', usersRouter);
-app.use('/marketplaces', marketplacesRouter);
-app.use('/products', productsRouter);
+app.use('/api', routes);
 
 app.listen(port, () => {
+    const endTime = Date.now();
     console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server started in ${(endTime - startTime) / 1000} seconds`);
 });

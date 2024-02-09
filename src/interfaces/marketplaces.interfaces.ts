@@ -1,9 +1,14 @@
-import { ObjectId } from 'mongoose';
+import { ObjectId } from 'bson';
 
 import { ProductInterface } from '@interfaces/products.interfaces';
 import {
-    AddressInterface, CommentInterface, ContactInformationInterface, FileInterface,
-    InteractionInterface, ReviewInterface, SocialMediaInterface
+    AddressInterface,
+    CommentInterface,
+    ContactInformationInterface,
+    FileInterface,
+    InteractionInterface,
+    ReviewInterface,
+    SocialMediaInterface,
 } from '@interfaces/shared.interfaces';
 
 import { UserInterface } from './users.interface';

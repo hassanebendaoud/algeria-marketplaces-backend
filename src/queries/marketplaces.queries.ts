@@ -1,9 +1,14 @@
 import { MarketplaceModel } from '@/models';
 import {
-    createMarketplacesQueryType, deleteOneMarketplacesQueryType, findAllMarketplacesQueryType,
-    findByIdAndUpdateMarketplacesQueryType, findByIdMarketplacesQueryType,
-    findOneAndUpdateMarketplacesQueryType, findOneMarketplacesQueryType,
-    updateOneMarketplacesQueryType
+    createMarketplacesQueryType,
+    deleteOneMarketplacesQueryType,
+    findAllMarketplacesQueryType,
+    findByIdAndUpdateMarketplacesQueryType,
+    findByIdMarketplacesQueryType,
+    findOneAndUpdateMarketplacesQueryType,
+    findOneMarketplacesQueryType,
+    updateManyMarketplacesQueryType,
+    updateOneMarketplacesQueryType,
 } from '@/types/marketplaces.types';
 import utils from '@/utils';
 
@@ -87,6 +92,19 @@ const findByIdAndUpdateQuery = async ({
     return recordUpdated;
 };
 
+const updateManyQuery = async ({
+    filter,
+    update,
+    options,
+}: updateManyMarketplacesQueryType) => {
+    const recordUpdated = await MarketplaceModel.updateMany(
+        filter,
+        update,
+        options
+    );
+    return recordUpdated;
+};
+
 const findOneQuery = async ({
     filter,
     populate = {
@@ -134,6 +152,7 @@ const updateOneQuery = async ({
 const marketplacesQueries = {
     createQuery,
     updateOneQuery,
+    updateManyQuery,
     deleteOneQuery,
 
     findAllQuery,

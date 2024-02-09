@@ -12,11 +12,11 @@ import {
 
 import { MarketplaceInterface } from '@/interfaces/marketplaces.interfaces';
 
-export type createMarketplacesQueryType = {
+export type createMarketplacesCommentsQueryType = {
     data: AnyKeys<MarketplaceInterface>;
 };
 
-export type deleteOneMarketplacesQueryType = {
+export type deleteOneMarketplacesCommentsQueryType = {
     filter: FilterQuery<MarketplaceInterface>;
     options?: Omit<
         MongooseQueryOptions<MarketplaceInterface>,
@@ -24,19 +24,19 @@ export type deleteOneMarketplacesQueryType = {
     > | null;
 };
 
-export type updateOneMarketplacesQueryType = {
+export type updateOneMarketplacesCommentsQueryType = {
     filter: FilterQuery<MarketplaceInterface>;
     update: UpdateQuery<MarketplaceInterface> | UpdateWithAggregationPipeline;
     options?: Omit<MongooseQueryOptions<MarketplaceInterface>, 'lean'> | null;
 };
 
-export type findOneAndUpdateMarketplacesQueryType = {
+export type findOneAndUpdateMarketplacesCommentsQueryType = {
     filter: FilterQuery<MarketplaceInterface>;
     update: UpdateQuery<MarketplaceInterface>;
     options?: QueryOptions<MarketplaceInterface> | null;
 };
 
-export type findOneMarketplacesQueryType = {
+export type findOneMarketplacesCommentsQueryType = {
     filter: FilterQuery<MarketplaceInterface>;
     projection?: ProjectionType<MarketplaceInterface>;
     options?: QueryOptions<MarketplaceInterface> | null;
@@ -50,13 +50,13 @@ export type findOneMarketplacesQueryType = {
     select: string;
 };
 
-export type findByIdAndUpdateMarketplacesQueryType = {
+export type findByIdAndUpdateMarketplacesCommentsQueryType = {
     _id: string;
     update: UpdateQuery<MarketplaceInterface>;
     options?: QueryOptions<MarketplaceInterface>;
 };
 
-export type findByIdMarketplacesQueryType = {
+export type findByIdMarketplacesCommentsQueryType = {
     filter: {
         _id: string;
         projection?: ProjectionType<MarketplaceInterface> | null;
@@ -71,13 +71,7 @@ export type findByIdMarketplacesQueryType = {
     select: string;
 };
 
-export type updateManyMarketplacesQueryType = {
-    filter: FilterQuery<MarketplaceInterface>;
-    update: UpdateQuery<MarketplaceInterface>;
-    options?: Omit<MongooseQueryOptions<MarketplaceInterface>, 'lean'> | null;
-};
-
-export type findAllMarketplacesQueryType = {
+export type findAllMarketplacesCommentsQueryType = {
     filter: FilterQuery<MarketplaceInterface>;
     populate?: {
         path: string | string[];

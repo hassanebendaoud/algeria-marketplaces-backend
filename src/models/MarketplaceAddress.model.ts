@@ -1,9 +1,10 @@
+import { MarketplaceAddressInterface } from '@/interfaces/marketplaces.interfaces';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const schema = new mongoose.Schema(
+const schema = new mongoose.Schema<MarketplaceAddressInterface>(
     {
         streetAddress: {
             type: String,
@@ -65,4 +66,4 @@ const schema = new mongoose.Schema(
     { timestamps: true }
 );
 
-export default model('MarketplaceAddress', schema);
+export default model<MarketplaceAddressInterface>('MarketplaceAddress', schema);
