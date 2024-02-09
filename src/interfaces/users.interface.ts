@@ -1,13 +1,26 @@
 import { ObjectId } from 'mongoose';
 
 import {
-    MarketplaceAddressInterface, MarketplaceAvatarInterface, MarketplaceCommentInterface,
-    MarketplaceContactInformationInterface, MarketplaceFavoriteInterface, MarketplaceImageInterface,
-    MarketplaceInterface, MarketplaceLikeInterface, MarketplaceReviewInterface,
-    MarketplaceSocialMediaInterface, MarketplaceVideoInterface, MarketplaceVoteInterface
+    MarketplaceAddressInterface,
+    MarketplaceAvatarInterface,
+    MarketplaceCommentInterface,
+    MarketplaceContactInformationInterface,
+    MarketplaceFavoriteInterface,
+    MarketplaceImageInterface,
+    MarketplaceInterface,
+    MarketplaceLikeInterface,
+    MarketplaceReviewInterface,
+    MarketplaceSocialMediaInterface,
+    MarketplaceVideoInterface,
+    MarketplaceVoteInterface,
 } from '@interfaces/marketplaces.interfaces';
 import {
-    ProductFavoriteInterface, ProductInterface, ProductLikeInterface, ProductVoteInterface
+    ProductCommentInterface,
+    ProductFavoriteInterface,
+    ProductInterface,
+    ProductLikeInterface,
+    ProductReviewInterface,
+    ProductVoteInterface,
 } from '@interfaces/products.interfaces';
 
 export interface UserInterface {
@@ -45,6 +58,9 @@ export interface UserInterface {
     MarketplaceLikes?: (MarketplaceLikeInterface | ObjectId | string)[];
     MarketplaceVotes?: (MarketplaceVoteInterface | ObjectId | string)[];
     MarketplaceFavorites?: (MarketplaceFavoriteInterface | ObjectId | string)[];
+
+    ProductComments?: (ProductCommentInterface | ObjectId | string)[];
+    ProductReviews?: (ProductReviewInterface | ObjectId | string)[];
 
     ProductLikes?: (ProductLikeInterface | ObjectId | string)[];
     ProductVotes?: (ProductVoteInterface | ObjectId | string)[];

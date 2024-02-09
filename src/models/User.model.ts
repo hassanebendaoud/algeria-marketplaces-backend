@@ -121,6 +121,19 @@ const schema = new Schema<UserInterface>(
             },
         ],
 
+        ProductComments: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'ProductComment',
+            },
+        ],
+        ProductReviews: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'ProductReview',
+            },
+        ],
+
         ProductLikes: [
             {
                 type: Schema.Types.ObjectId,
