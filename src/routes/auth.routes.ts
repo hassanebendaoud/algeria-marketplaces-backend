@@ -17,6 +17,8 @@ router.post(
     zodValidateMiddleware(authSchemas.registerSchema),
     authController.registerController
 );
-router.get('/', authMiddleware, authController.protectController);
+router.get('/protect', authMiddleware, authController.protectController);
+router.get('/me', authMiddleware, authController.meController);
+router.get('/logout', authController.logoutController);
 
 export default router;

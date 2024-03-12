@@ -24,6 +24,10 @@ const schema = new Schema<UserInterface>(
             required: true,
             unique: true,
         },
+        emailVerified: {
+            type: Boolean,
+            default: false,
+        },
         hash: {
             type: String,
             required: true,

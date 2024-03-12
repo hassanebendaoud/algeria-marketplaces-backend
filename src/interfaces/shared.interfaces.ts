@@ -119,3 +119,23 @@ export interface SocialMediaInterface {
     createdAt: Date;
     updatedAt: Date;
 }
+
+export interface AuthData {
+    id: string;
+    username: string;
+    email: string;
+    emailVerified: boolean;
+    name: string;
+}
+
+export interface TokenObject {
+    token: string;
+    expires: number; // Assuming it's a Unix timestamp or similar
+}
+
+export interface ResponseObject {
+    success: boolean;
+    data: AuthData;
+    token: string;
+    expiresIn: number;
+}

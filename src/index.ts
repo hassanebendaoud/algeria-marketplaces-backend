@@ -30,6 +30,8 @@ if (!port) {
 
 console.log(`Express will be running on port ${port}`);
 
+app.use(cors()); // cors middleware
+
 Passport(passport);
 app.use(passport.initialize());
 
@@ -41,7 +43,6 @@ app.use(express.json()); // parse application/json
 app.use(express.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
 
 // Allows our Angular application to make HTTP requests to Express application
-app.use(cors()); // cors middleware
 
 // Allows our Express application to parse the incoming requests with JSON payloads
 app.use(upload.any()); // multer middleware

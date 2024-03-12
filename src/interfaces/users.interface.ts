@@ -28,6 +28,7 @@ export interface UserInterface {
     lastName: string;
     username: string;
     email: string;
+    emailVerified: boolean;
     hash: string;
     salt: string;
     gender?: string;

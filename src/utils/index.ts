@@ -6,7 +6,7 @@ import mongoose, { Model } from 'mongoose';
 
 import { MarketplaceInterface } from '@/interfaces/marketplaces.interfaces';
 import { ProductInterface } from '@/interfaces/products.interfaces';
-import { keysConfig } from '@config/index';
+import { jwtConfig, keysConfig } from '@config/index';
 
 const checkKeyPairExist = () => {
     // Path to the public key file
@@ -140,7 +140,7 @@ const issueJWT = (user: { _id: mongoose.Types.ObjectId }) => {
     });
 
     return {
-        token: 'Bearer ' + signedToken,
+        token: signedToken,
         expires: expiresIn,
     };
 };
